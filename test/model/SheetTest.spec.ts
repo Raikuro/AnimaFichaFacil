@@ -7,11 +7,11 @@ import { fold } from 'fp-ts/lib/Option'
 import 'mocha';
 
 function identity<A>(a: A): A { return a; }
- 
+
 describe('Sheet', () => {
- 
+
   it('should set basic data correctly', () => {
-    const sheet:Sheet = Sheet.builder
+    const sheet: Sheet = Sheet.builder
       .withName("BANANA NAME")
       .withAppearance(10)
       .withAgi(1)
@@ -27,6 +27,15 @@ describe('Sheet', () => {
       .withRace(Race.HUMANO)
       .withGnosis(10)
       .build();
+    expect(sheet.agiFinal).to.equal(1);
+    expect(sheet.conFinal).to.equal(2);
+    expect(sheet.desFinal).to.equal(3);
+    expect(sheet.fueFinal).to.equal(4);
+    expect(sheet.intFinal).to.equal(20);
+    expect(sheet.perFinal).to.equal(8);
+    expect(sheet.podFinal).to.equal(12);
+    expect(sheet.volFinal).to.equal(15);
+
     expect(sheet.agiBonus).to.equal(-30);
     expect(sheet.conBonus).to.equal(-20);
     expect(sheet.desBonus).to.equal(-10);
@@ -44,15 +53,6 @@ describe('Sheet', () => {
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);
     expect(sheet.naturaPlus).to.equal(10);
-
-    expect(sheet.agiFinal).to.equal(1);
-    expect(sheet.conFinal).to.equal(2);
-    expect(sheet.desFinal).to.equal(3);
-    expect(sheet.fueFinal).to.equal(4);
-    expect(sheet.intFinal).to.equal(20);
-    expect(sheet.perFinal).to.equal(8);
-    expect(sheet.podFinal).to.equal(12);
-    expect(sheet.volFinal).to.equal(15);
 
     expect(sheet.totalLifePoints).to.equal(20);
     expect(sheet.currentLifePoints).to.equal(20);
@@ -76,7 +76,7 @@ describe('Sheet', () => {
   })
 
   it('nephilim sylvain should add his own advantages', () => {
-    const sheet:Sheet = Sheet.builder
+    const sheet: Sheet = Sheet.builder
       .withName("BANANA NAME")
       .withAppearance(10)
       .withAgi(1)
@@ -93,7 +93,7 @@ describe('Sheet', () => {
       .withNephilim(Nephilim.SYLVAIN)
       .withGnosis(10)
       .build();
-    
+
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.SYLVAIN);
 
     expect(sheet.rf).to.equal(15);
