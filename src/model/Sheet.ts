@@ -4,6 +4,33 @@ import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
 import { TypeOfMovement } from "./TypeOfMovement";
 
+// function getter(resultIfUndefined) {
+
+//     function getOrInitialize<A>(attr: A, resultIfUndefined: A): A {
+//         return attr ? attr : resultIfUndefined;
+//     }
+
+//     // console.log("-------------------------", resultIfUndefined);
+//     return function setGetters(target: Object, name: string) {
+//         return Object.defineProperty(target, name, {
+//             get: function () { return getOrInitialize(this["_" + name], resultIfUndefined); }
+//         });
+//     }
+// }
+
+function getter(target: Object, name: string) {
+    return Object.defineProperty(target, name, {
+        get: function () { return this["_" + name]; }
+    });
+}
+
+
+function setter(target: Object, name: string) {
+    Object.defineProperty(target, name, {
+        set: function (value) { this["_" + name] = value; }
+    });
+}
+
 class SheetBuilder {
     private _name: string;
     private _appearance: number;
@@ -108,6 +135,8 @@ class SheetBuilder {
 
 export class Sheet {
 
+    // public withName(name:string):Sheet { return new Sheet(this.name, this.appearance, this.agi, this.con, this.des, this.fue, this.int, this.per, this.pod, this.vol, this.level, this.clazz, this.race, this.nephilim); };
+
     private getOrInitialize<A>(attr: A, result: A): A {
         return attr ? attr : result;
     }
@@ -134,39 +163,22 @@ export class Sheet {
 
     public static builder: SheetBuilder = new SheetBuilder();
 
-    private _name: string;
-    private _race: Race;
-    private _nephilim: Option<Nephilim>;
-    private _level: number;
-    private _appearance: number;
-    private _clazz: Clazz;
-    private _agi: number;
-    private _con: number;
-    private _des: number;
-    private _fue: number;
-    private _int: number;
-    private _per: number;
-    private _pod: number;
-    private _vol: number;
-    private _gnosis: number
+    @getter name;
+    @getter race;
+    @getter nephilim;
+    @getter level;
+    @getter appearance;
+    @getter clazz;
+    @getter gnosis;
 
-    public get name() { return this._name };
-    // public withName(name:string):Sheet { return new Sheet(this.name, this.appearance, this.agi, this.con, this.des, this.fue, this.int, this.per, this.pod, this.vol, this.level, this.clazz, this.race, this.nephilim); };
-    public get race() { return this._race };
-    public get nephilim() { return this._nephilim };
-    public get level() { return this._level };
-    public get appearance() { return this._appearance };
-    public get clazz() { return this._clazz };
-    public get gnosis() { return this._gnosis };
-
-    public get agi() { return this._agi };
-    public get con() { return this._con };
-    public get des() { return this._des };
-    public get fue() { return this._fue };
-    public get int() { return this._int };
-    public get per() { return this._per };
-    public get pod() { return this._pod };
-    public get vol() { return this._vol };
+    @getter agi;
+    @getter con;
+    @getter des;
+    @getter fue;
+    @getter int;
+    @getter per;
+    @getter pod;
+    @getter vol;
 
     public get agiFinal() { return this.agi };
     public get conFinal() { return this.con };
@@ -202,6 +214,7 @@ export class Sheet {
 
     public get presence() { return this.totalPDs / 20 };
     public _rf: number;
+    // @getter(this.presence + this.conBonus) @setter rf;
     public _re: number;
     public _rv: number;
     public _rm: number;
@@ -226,45 +239,28 @@ export class Sheet {
     public addAdditionalInfo = (newInfo: string) => this._additionalInfo.push(newInfo);
     public get additionalInfo() { return this._additionalInfo };
 
-    public get naturaPlus() { return this._gnosis - this.race.natura; }
+    public get naturaPlus() { return this.gnosis - this.race.natura; }
 
     public constructor(
-        name: string,
-        appearance: number,
-        agi: number,
-        con: number,
-        des: number,
-        fue: number,
-        int: number,
-        per: number,
-        pod: number,
-        vol: number,
-        level: number,
-        clazz: Clazz,
-        race: Race,
-        nephilim: Option<Nephilim>,
-        gnosis: number
+        private _name: string,
+        private _appearance: number,
+        private _agi: number,
+        private _con: number,
+        private _des: number,
+        private _fue: number,
+        private _int: number,
+        private _per: number,
+        private _pod: number,
+        private _vol: number,
+        private _level: number,
+        private _clazz: Clazz,
+        private _race: Race,
+        private _nephilim: Option<Nephilim>,
+        private _gnosis: number
     ) {
-        this._name = name;
-        this._appearance = appearance;
-        this._agi = agi;
-        this._con = con;
-        this._des = des;
-        this._fue = fue;
-        this._int = int;
-        this._per = per;
-        this._pod = pod;
-        this._vol = vol;
-        this._level = level;
-        this._clazz = clazz;
-        this._race = race;
-        this._nephilim = nephilim;
-        this._gnosis = gnosis
-
         this._additionalInfo = [];
 
         this.applyAll();
     }
-
 }
 
