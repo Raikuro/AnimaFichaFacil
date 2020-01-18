@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/Raikuro/AnimaFichaFacil.git"
   },
-  "author": "Raikuro",
+  "authors": ["Raikuro", "Astaldo"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Raikuro/AnimaFichaFacil/issues"
@@ -37,6 +37,7 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^13.1.6",
     "chai": "^4.2.0",
+    "fp-ts": "^2.4.1",
     "mocha": "^7.0.0",
     "nodemon": "^2.0.2",
     "ts-node": "^8.6.2",

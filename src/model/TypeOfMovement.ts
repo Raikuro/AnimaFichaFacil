@@ -10,11 +10,7 @@ export class TypeOfMovement{
         return new TypeOfMovement(agi)
     }
 
-    public get maximumDistancePerAssault():number {
-        return this._maximumDistancePerAssault();
-    }
+    public get maximumDistancePerAssault():number { return this._maximumDistancePerAssault(); }
 
-    public get passiveDistancePerAssault():number {
-        return this.maximumDistancePerAssault/4
-    }
+    public get passiveDistancePerAssault():number { return this.maximumDistancePerAssault/4; }
 }
