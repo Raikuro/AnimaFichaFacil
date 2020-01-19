@@ -110,38 +110,38 @@ describe('Sheet', () => {
     expect(sheet.additionalInfo).to.contain(("Penalizador de -4."));
   })
 
-  // it('nephilim jayan should add his own advantages', () => {
-  //   const sheet: Sheet = Sheet.builder
-  //     .withName("BANANA NAME")
-  //     .withAppearance(10)
-  //     .withAgi(1)
-  //     .withCon(2)
-  //     .withDes(3)
-  //     .withFue(4)
-  //     .withInt(20)
-  //     .withPer(8)
-  //     .withPod(12)
-  //     .withVol(15)
-  //     .withLevel(1)
-  //     .withClazz(Clazz.GUERRERO)
-  //     .withRace(Race.HUMANO)
-  //     .withNephilim(Nephilim.JAYAN)
-  //     .withGnosis(10)
-  //     .build();
+  it('nephilim jayan should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withRace(Race.HUMANO)
+      .withNephilim(Nephilim.JAYAN)
+      .withGnosis(10)
+      .build();
 
-  //   expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.JAYAN);
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.JAYAN);
 
-  //   console.log(sheet);
+    console.log(sheet);
 
-  //   expect(sheet.size).to.equal(9);
-  //   expect(sheet.fatiguePoints).to.equal(3);
-  //   expect(sheet.rf).to.equal(25);
-  //   expect(sheet.fueFinal).to.equal(5);
-  //   expect(sheet.rm).to.equal(40);
+    expect(sheet.size).to.equal(9);
+    expect(sheet.fatiguePoints).to.equal(3);
+    expect(sheet.rf).to.equal(25);
+    expect(sheet.fueFinal).to.equal(5);
+    expect(sheet.rm).to.equal(40);
 
-  //   expect(sheet.additionalInfo).to.contain("No puede escoger tamaño desigual para disminuir su tamaño.");
-  //   expect(sheet.additionalInfo).to.contain("No puede escoger reducir FUE dos puntos.");
-  //   expect(sheet.additionalInfo).to.contain("Puede ver espíritus si cierra los ojos.");
-  //   expect(sheet.additionalInfo).to.contain("Penalizador de -3.");
-  // })
+    expect(sheet.additionalInfo).to.contain("No puede escoger tamaño desigual para disminuir su tamaño.");
+    expect(sheet.additionalInfo).to.contain("No puede escoger reducir FUE dos puntos.");
+    expect(sheet.additionalInfo).to.contain("Puede ver espíritus si cierra los ojos.");
+    expect(sheet.additionalInfo).to.contain("Penalizador de -3.");
+  })
 });

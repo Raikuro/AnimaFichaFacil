@@ -13,8 +13,12 @@ export function field(defaultFunction?) {
 
     return (target: Object, name: string) => {
         Object.defineProperty(target, name, {
-            get: function () { return getOrInitialize(this["_" + name], defaultFunction(this)); },
-            set: function (value) { this["_" + name] = value; },
+            get: function () { 
+                if(this["_" + name + "Mod"])
+                    return defaultFunction(this) + this["_" + name + "Mod"];
+                return defaultFunction(this);
+            },
+            set: function (value) { this["_" + name + "Mod"] = value-this[name]; },
             configurable: true
         });
     }
