@@ -343,4 +343,68 @@ describe('Sheet', () => {
     expect(sheet.additionalInfo).to.contain("Sangre fría");
     expect(sheet.expPenalizator).to.equal(-3);
   })
+
+  it('nephilim devah should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.FEMALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withNephilim(Nephilim.DEVAH)
+      .withRace(Race.HUMANO)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.DEVAH);
+
+    expect(sheet.rf).to.equal(0);
+    expect(sheet.re).to.equal(0);
+    expect(sheet.rv).to.equal(10);
+    expect(sheet.rm).to.equal(60);
+    expect(sheet.rp).to.equal(70);
+    expect(sheet.additionalInfo).to.contain("El ojo del alma.");
+    expect(sheet.additionalInfo).to.contain("Lazos existenciales: +10 a Convocar y Desconvocar.");
+    expect(sheet.expPenalizator).to.equal(-3);
+  })
+
+  it('nephilim vetala should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.FEMALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withNephilim(Nephilim.VETALA)
+      .withRace(Race.HUMANO)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.VETALA);
+    
+    expect(sheet.regen).to.equal(1);
+    expect(sheet.re).to.equal(-10);
+    expect(sheet.additionalInfo).to.contain("Aguante al daño crítico.");
+    expect(sheet.additionalInfo).to.contain("Éxtasis sanguíneo.");
+    expect(sheet.additionalInfo).to.contain("Piel fotosensible.");
+    expect(sheet.additionalInfo).to.contain("Obsesión por la sangre.");
+    expect(sheet.expPenalizator).to.equal(-3);
+  })
+  
 });
