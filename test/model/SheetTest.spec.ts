@@ -72,6 +72,7 @@ describe('Sheet', () => {
     expect(sheet.totalPDs).to.equal(600);
     expect(sheet.availablePcs).to.equal(3);
     expect(sheet.availableAttributeUp).to.equal(0);
+    expect(sheet.expPenalizator).to.equal(0);
     expect(sheet.additionalInfo).to.be.empty;
   })
 
@@ -107,7 +108,7 @@ describe('Sheet', () => {
     expect(sheet.additionalInfo).to.contain("No puede escoger desequilibro magico hacia Oscuridad.");
     expect(sheet.additionalInfo).to.contain(("Presentir lo oscuro y luminososo."));
     expect(sheet.additionalInfo).to.contain(("Necesidades a la mitad."));
-    expect(sheet.additionalInfo).to.contain(("Penalizador de -4."));
+    expect(sheet.expPenalizator).to.equal(-4);
   })
 
   it('nephilim jayan should add his own advantages', () => {
@@ -140,6 +141,6 @@ describe('Sheet', () => {
     expect(sheet.additionalInfo).to.contain("No puede escoger tamaño desigual para disminuir su tamaño.");
     expect(sheet.additionalInfo).to.contain("No puede escoger reducir FUE dos puntos.");
     expect(sheet.additionalInfo).to.contain("Puede ver espíritus si cierra los ojos.");
-    expect(sheet.additionalInfo).to.contain("Penalizador de -3.");
+    expect(sheet.expPenalizator).to.equal(-3);
   })
 });

@@ -88,6 +88,7 @@ export class Sheet {
     @calculatedValue((sheet: Sheet) => sheet.level === 0 ? 400 : 500 + sheet.level * 100) totalPDs: number;
     @calculatedValue((sheet: Sheet) => 3) availablePcs: number;
     @calculatedValue((sheet: Sheet) => 0) exp: number;
+    @calculatedValue((sheet: Sheet) => 0) expPenalizator: number;
     @calculatedValue((sheet: Sheet) => Math.floor(sheet.level / 2)) availableAttributeUp: number;
 
     @getter additionalInfo: string[];

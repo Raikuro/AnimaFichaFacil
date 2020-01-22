@@ -20,21 +20,20 @@ export class Nephilim implements BaseComand {
       sheet.addAdditionalInfo("No puede escoger desequilibro magico hacia Oscuridad.");
       sheet.addAdditionalInfo("Presentir lo oscuro y luminososo.");
       sheet.addAdditionalInfo("Necesidades a la mitad.");
-      sheet.addAdditionalInfo("Penalizador de -4.");
+      sheet.expPenalizator -= 4
       return sheet;
    };
 
    private static jayan(sheet: Sheet): Sheet {
       sheet.size += 2;
       sheet.fueFinal += 1;
-      
       sheet.fatiguePoints += 1;
       sheet.rf += 15;
       sheet.rm -= 10;
       sheet.addAdditionalInfo("No puede escoger tamaño desigual para disminuir su tamaño.");
       sheet.addAdditionalInfo("No puede escoger reducir FUE dos puntos.");
       sheet.addAdditionalInfo("Puede ver espíritus si cierra los ojos.");
-      sheet.addAdditionalInfo("Penalizador de -3.");
+      sheet.expPenalizator -= 3
       return sheet;
    };
 
@@ -54,11 +53,26 @@ export class Nephilim implements BaseComand {
       return sheet;
    };
 
+   private static devah(sheet: Sheet): Sheet {
+      return sheet;
+   };
+
+   private static vetala(sheet: Sheet): Sheet {
+      return sheet;
+   };
+
+   private static turak(sheet: Sheet): Sheet {
+      return sheet;
+   };
+
    public static readonly SYLVAIN: Nephilim = new Nephilim(Nephilim.sylvain);
    public static readonly JAYAN: Nephilim = new Nephilim(Nephilim.jayan);
    public static readonly D_ANJAYNI: Nephilim = new Nephilim(Nephilim.dAnjayni);
    public static readonly EBUDAN: Nephilim = new Nephilim(Nephilim.ebudan);
    public static readonly DAIMAH: Nephilim = new Nephilim(Nephilim.daimah);
    public static readonly DUK_ZARIST: Nephilim = new Nephilim(Nephilim.dukZarist);
+   public static readonly DEVAH: Nephilim = new Nephilim(Nephilim.devah);
+   public static readonly VETALA: Nephilim = new Nephilim(Nephilim.vetala);
+   public static readonly TURAK: Nephilim = new Nephilim(Nephilim.turak);
 
 }
