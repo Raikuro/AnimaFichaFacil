@@ -4,9 +4,9 @@ import { Sex } from "./Sex";
 
 export class Nephilim implements BaseComand {
 
-   public readonly apply: (sheet:Sheet) => Sheet;
+   public readonly apply: (sheet: Sheet) => Sheet;
 
-   private constructor(apply: (sheet:Sheet) => Sheet) {
+   private constructor(apply: (sheet: Sheet) => Sheet) {
       this.apply = apply;
    }
 
@@ -48,7 +48,7 @@ export class Nephilim implements BaseComand {
    };
 
    private static ebudan(sheet: Sheet): Sheet {
-      sheet.addAdditionalInfo("Or´inie.");
+      sheet.addAdditionalInfo("Or'inie.");
       sheet.addAdditionalInfo("Alas de Serafín.");
       sheet.addAdditionalInfo("Esencia celestial.");
       sheet.expPenalizator -= 3;
@@ -67,13 +67,13 @@ export class Nephilim implements BaseComand {
 
    private static dukZarist(sheet: Sheet): Sheet {
       sheet.regen += 1;
-      sheet.rf+=15;
-      sheet.re+=15;
-      sheet.rv+=15;
-      sheet.rm+=15;
-      sheet.rp+=15;
-      if(Sex.MALE === sheet.sex) {sheet.rf+=5;}
-      else { sheet.rm += 5;}
+      sheet.rf += 15;
+      sheet.re += 15;
+      sheet.rv += 15;
+      sheet.rm += 15;
+      sheet.rp += 15;
+      if (Sex.MALE === sheet.sex) { sheet.rf += 5; }
+      else { sheet.rm += 5; }
       sheet.addAdditionalInfo("Desequilibrio hacia la oscuridad.");
       sheet.addAdditionalInfo("Aguante a la muerte.");
       sheet.addAdditionalInfo("Necesidades limitadas.");
@@ -87,25 +87,19 @@ export class Nephilim implements BaseComand {
    };
 
    private static devah(sheet: Sheet): Sheet {
-      sheet.addAdditionalInfo("Or´inie.");
-      sheet.addAdditionalInfo("Alas de Serafín.");
-      sheet.addAdditionalInfo("Esencia celestial.");
-      sheet.expPenalizator -= 3;
       return sheet;
    };
 
    private static vetala(sheet: Sheet): Sheet {
-      sheet.addAdditionalInfo("Or´inie.");
-      sheet.addAdditionalInfo("Alas de Serafín.");
-      sheet.addAdditionalInfo("Esencia celestial.");
-      sheet.expPenalizator -= 3;
       return sheet;
    };
 
    private static turak(sheet: Sheet): Sheet {
-      sheet.addAdditionalInfo("Or´inie.");
-      sheet.addAdditionalInfo("Alas de Serafín.");
-      sheet.addAdditionalInfo("Esencia celestial.");
+      sheet.addAdditionalInfo("Armas naturales: Obtiene armas naturales con daño base 30+bono de FUE y atacan en FIL.");
+      sheet.addAdditionalInfo("Memoria racial.");
+      sheet.addAdditionalInfo("Piel resistente: Obtiene armadura natural 1 contra FIL, CON, PEN, CAL.");
+      sheet.addAdditionalInfo("Sangre fría");
+      sheet.iniciative -= 10;
       sheet.expPenalizator -= 3;
       return sheet;
    };

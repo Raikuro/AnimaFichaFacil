@@ -200,7 +200,7 @@ describe('Sheet', () => {
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.EBUDAN);
 
-    expect(sheet.additionalInfo).to.contain("Or´inie.");
+    expect(sheet.additionalInfo).to.contain("Or'inie.");
     expect(sheet.additionalInfo).to.contain("Alas de Serafín.");
     expect(sheet.additionalInfo).to.contain("Esencia celestial.");
     expect(sheet.expPenalizator).to.equal(-3);
@@ -312,5 +312,35 @@ describe('Sheet', () => {
     expect(sheet.additionalInfo).to.contain("Cuerpos perfectos: La esencia de los Duk´zarist impide que el cuerpo desarrolle ningún tipo de malformación natural. El Nephilim no puede elegir ninguna de las siguientes desventajas: Miembro atrofiado, Salud enfermiza, Vulnerabilidad a los venenos, Miopía, Debilidad física, Enfermedad grave, Mudo, Ciego o Sordo.");
     expect(sheet.additionalInfo).to.contain("Alergia al metal.");
     expect(sheet.expPenalizator).to.equal(-5);
+  })
+
+  it('nephilim turak should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.FEMALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withNephilim(Nephilim.TURAK)
+      .withRace(Race.HUMANO)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.TURAK);
+
+    expect(sheet.iniciative).to.equal(-30);
+    expect(sheet.additionalInfo).to.contain("Armas naturales: Obtiene armas naturales con daño base 30+bono de FUE y atacan en FIL.");
+    expect(sheet.additionalInfo).to.contain("Memoria racial.");
+    expect(sheet.additionalInfo).to.contain("Piel resistente: Obtiene armadura natural 1 contra FIL, CON, PEN, CAL.");
+    expect(sheet.additionalInfo).to.contain("Sangre fría");
+    expect(sheet.expPenalizator).to.equal(-3);
   })
 });
