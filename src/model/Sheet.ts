@@ -5,6 +5,7 @@ import { Race } from "./Race";
 import { TypeOfMovement } from "./TypeOfMovement";
 import { getter, calculatedValue } from '../utils/SheetDecorators';
 import { SheetBuilder } from './SheetBuilder';
+import { Sex } from './Sex';
 
 export class Sheet {
 
@@ -31,6 +32,7 @@ export class Sheet {
     public static builder: SheetBuilder = new SheetBuilder();
 
     @getter name: number;
+    @getter sex: Sex;
     @getter race: Race;
     @getter nephilim: Option<Nephilim>;
     @getter level: number;
@@ -98,6 +100,7 @@ export class Sheet {
 
     public constructor(
         private _name: string,
+        private _sex: Sex,
         private _appearance: number,
         private _agi: number,
         private _con: number,
@@ -117,4 +120,3 @@ export class Sheet {
         this.applyAll();
     }
 }
-

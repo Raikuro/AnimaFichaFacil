@@ -1,11 +1,12 @@
 import { Sheet } from "./Sheet";
 import { BaseComand } from "./BaseComand";
+import { Sex } from "./Sex";
 
 export class Nephilim implements BaseComand {
 
-   public readonly apply: (Sheet) => Sheet;
+   public readonly apply: (sheet:Sheet) => Sheet;
 
-   private constructor(apply: (Sheet) => Sheet) {
+   private constructor(apply: (sheet:Sheet) => Sheet) {
       this.apply = apply;
    }
 
@@ -16,10 +17,9 @@ export class Nephilim implements BaseComand {
       sheet.rf += 5;
       sheet.rv += 5;
       sheet.regen += 1;
-      sheet.addAdditionalInfo("Resistencia especial de +10 contra cualquier efecto basado en luz.");
-      sheet.addAdditionalInfo("No puede escoger desequilibro magico hacia Oscuridad.");
-      sheet.addAdditionalInfo("Presentir lo oscuro y luminososo.");
-      sheet.addAdditionalInfo("Necesidades a la mitad.");
+      sheet.addAdditionalInfo("Desequilibrio hacia la luz");
+      sheet.addAdditionalInfo("Presentir lo oscuro y lo luminososo.");
+      sheet.addAdditionalInfo("Necesidades limitadas.");
       sheet.expPenalizator -= 4
       return sheet;
    };
@@ -32,36 +32,81 @@ export class Nephilim implements BaseComand {
       sheet.rm -= 10;
       sheet.addAdditionalInfo("No puede escoger tamaño desigual para disminuir su tamaño.");
       sheet.addAdditionalInfo("No puede escoger reducir FUE dos puntos.");
-      sheet.addAdditionalInfo("Puede ver espíritus si cierra los ojos.");
+      sheet.addAdditionalInfo("Visión espiritual.");
       sheet.expPenalizator -= 3
       return sheet;
    };
 
    private static dAnjayni(sheet: Sheet): Sheet {
+      sheet.addAdditionalInfo("Indetectibilidad: Aprende la habilidad Ocultacion del Ki y tiene un bono de +30.");
+      sheet.addAdditionalInfo("Olvido.");
+      sheet.addAdditionalInfo("Susurros silenciosos.");
+      sheet.addAdditionalInfo("Pasar sin dejar rastro.");
+      sheet.addAdditionalInfo("Nunca puede tener una apariencia inferior a 3 o superior a 7.");
+      sheet.expPenalizator -= 3;
       return sheet;
    };
 
    private static ebudan(sheet: Sheet): Sheet {
+      sheet.addAdditionalInfo("Or´inie.");
+      sheet.addAdditionalInfo("Alas de Serafín.");
+      sheet.addAdditionalInfo("Esencia celestial.");
+      sheet.expPenalizator -= 3;
       return sheet;
    };
 
    private static daimah(sheet: Sheet): Sheet {
+      sheet.addAdditionalInfo("Sentir el bosque.");
+      sheet.addAdditionalInfo("Movimiento por los bosques.");
+      sheet.addAdditionalInfo("Ver la esencia.");
+      sheet.addAdditionalInfo("Naturaleza curativa.");
+      sheet.size -= 1;
+      sheet.expPenalizator -= 3;
       return sheet;
    };
 
    private static dukZarist(sheet: Sheet): Sheet {
+      sheet.regen += 1;
+      sheet.rf+=15;
+      sheet.re+=15;
+      sheet.rv+=15;
+      sheet.rm+=15;
+      sheet.rp+=15;
+      if(Sex.MALE === sheet.sex) {sheet.rf+=5;}
+      else { sheet.rm += 5;}
+      sheet.addAdditionalInfo("Desequilibrio hacia la oscuridad.");
+      sheet.addAdditionalInfo("Aguante a la muerte.");
+      sheet.addAdditionalInfo("Necesidades limitadas.");
+      sheet.addAdditionalInfo("Presentir lo oscuro y lo luminoso.");
+      sheet.addAdditionalInfo("Vision nocturna.");
+      sheet.addAdditionalInfo("Devoción al Fuego: Si desarrolla sus habilidades mentales, tiene la obligación de adquirir como primera disciplina la Piroquinesis.");
+      sheet.addAdditionalInfo("Cuerpos perfectos: La esencia de los Duk´zarist impide que el cuerpo desarrolle ningún tipo de malformación natural. El Nephilim no puede elegir ninguna de las siguientes desventajas: Miembro atrofiado, Salud enfermiza, Vulnerabilidad a los venenos, Miopía, Debilidad física, Enfermedad grave, Mudo, Ciego o Sordo.");
+      sheet.addAdditionalInfo("Alergia al metal.");
+      sheet.expPenalizator -= 5;
       return sheet;
    };
 
    private static devah(sheet: Sheet): Sheet {
+      sheet.addAdditionalInfo("Or´inie.");
+      sheet.addAdditionalInfo("Alas de Serafín.");
+      sheet.addAdditionalInfo("Esencia celestial.");
+      sheet.expPenalizator -= 3;
       return sheet;
    };
 
    private static vetala(sheet: Sheet): Sheet {
+      sheet.addAdditionalInfo("Or´inie.");
+      sheet.addAdditionalInfo("Alas de Serafín.");
+      sheet.addAdditionalInfo("Esencia celestial.");
+      sheet.expPenalizator -= 3;
       return sheet;
    };
 
    private static turak(sheet: Sheet): Sheet {
+      sheet.addAdditionalInfo("Or´inie.");
+      sheet.addAdditionalInfo("Alas de Serafín.");
+      sheet.addAdditionalInfo("Esencia celestial.");
+      sheet.expPenalizator -= 3;
       return sheet;
    };
 

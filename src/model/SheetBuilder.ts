@@ -3,18 +3,17 @@ import { Clazz } from "./Clazz";
 import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
 import { Sheet } from './Sheet';
-
-function field(target: Object, name: string) {
-    return Object.defineProperty(target, name, {
-        get: () => this["_" + name],
-        set: function (value) { this["_" + name] = value; return true },
-    });
-}
+import { Sex } from './Sex';
 
 export class SheetBuilder {
 
     public withName(name: string): SheetBuilder {
         this._name = name;
+        return this;
+    }
+
+    public withSex(sex: Sex): SheetBuilder {
+        this._sex = sex;
         return this;
     }
 
@@ -90,6 +89,7 @@ export class SheetBuilder {
 
     constructor(
         private _name?: string,
+        private _sex?: Sex,
         private _appearance?: number,
         private _agi?: number,
         private _con?: number,
@@ -109,6 +109,7 @@ export class SheetBuilder {
     public build(): Sheet {
         return new Sheet(
             this._name,
+            this._sex,
             this._appearance,
             this._agi,
             this._con,

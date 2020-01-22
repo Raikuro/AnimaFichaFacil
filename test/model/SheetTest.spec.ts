@@ -5,6 +5,7 @@ import { Nephilim } from "../../src/model/Nephilim";
 import { expect } from 'chai';
 import { fold } from 'fp-ts/lib/Option'
 import 'mocha';
+import { Sex } from "../../src/model/Sex";
 
 function identity<A>(a: A): A { return a; }
 
@@ -13,6 +14,7 @@ describe('Sheet', () => {
   it('should set basic data correctly', () => {
     const sheet: Sheet = Sheet.builder
       .withName("BANANA NAME")
+      .withSex(Sex.MALE)
       .withAppearance(10)
       .withAgi(1)
       .withCon(2)
@@ -46,6 +48,7 @@ describe('Sheet', () => {
     expect(sheet.volBonus).to.equal(30);
 
     expect(sheet.name).to.equal("BANANA NAME");
+    expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
     expect(sheet.clazz).to.equal(Clazz.GUERRERO);
@@ -79,6 +82,7 @@ describe('Sheet', () => {
   it('nephilim sylvain should add his own advantages', () => {
     const sheet: Sheet = Sheet.builder
       .withName("BANANA NAME")
+      .withSex(Sex.MALE)
       .withAppearance(10)
       .withAgi(1)
       .withCon(2)
@@ -104,16 +108,16 @@ describe('Sheet', () => {
     expect(sheet.rp).to.equal(70);
     expect(sheet.regen).to.equal(1);
 
-    expect(sheet.additionalInfo).to.contain("Resistencia especial de +10 contra cualquier efecto basado en luz.");
-    expect(sheet.additionalInfo).to.contain("No puede escoger desequilibro magico hacia Oscuridad.");
-    expect(sheet.additionalInfo).to.contain(("Presentir lo oscuro y luminososo."));
-    expect(sheet.additionalInfo).to.contain(("Necesidades a la mitad."));
+    expect(sheet.additionalInfo).to.contain("Desequilibrio hacia la luz");
+    expect(sheet.additionalInfo).to.contain("Presentir lo oscuro y lo luminososo.");
+    expect(sheet.additionalInfo).to.contain("Necesidades limitadas.");
     expect(sheet.expPenalizator).to.equal(-4);
   })
 
   it('nephilim jayan should add his own advantages', () => {
     const sheet: Sheet = Sheet.builder
       .withName("BANANA NAME")
+      .withSex(Sex.MALE)
       .withAppearance(10)
       .withAgi(1)
       .withCon(2)
@@ -140,7 +144,173 @@ describe('Sheet', () => {
 
     expect(sheet.additionalInfo).to.contain("No puede escoger tamaño desigual para disminuir su tamaño.");
     expect(sheet.additionalInfo).to.contain("No puede escoger reducir FUE dos puntos.");
-    expect(sheet.additionalInfo).to.contain("Puede ver espíritus si cierra los ojos.");
+    expect(sheet.additionalInfo).to.contain("Visión espiritual.");
     expect(sheet.expPenalizator).to.equal(-3);
+  })
+
+  it('nephilim d\'anjayni should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.MALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withRace(Race.HUMANO)
+      .withNephilim(Nephilim.D_ANJAYNI)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.D_ANJAYNI);
+
+    expect(sheet.additionalInfo).to.contain("Indetectibilidad: Aprende la habilidad Ocultacion del Ki y tiene un bono de +30.");
+    expect(sheet.additionalInfo).to.contain("Olvido.");
+    expect(sheet.additionalInfo).to.contain("Susurros silenciosos.");
+    expect(sheet.additionalInfo).to.contain("Pasar sin dejar rastro.");
+    expect(sheet.additionalInfo).to.contain("Nunca puede tener una apariencia inferior a 3 o superior a 7.");
+    expect(sheet.expPenalizator).to.equal(-3);
+  })
+
+  it('nephilim ebudan should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.MALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withRace(Race.HUMANO)
+      .withNephilim(Nephilim.EBUDAN)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.EBUDAN);
+
+    expect(sheet.additionalInfo).to.contain("Or´inie.");
+    expect(sheet.additionalInfo).to.contain("Alas de Serafín.");
+    expect(sheet.additionalInfo).to.contain("Esencia celestial.");
+    expect(sheet.expPenalizator).to.equal(-3);
+  })
+
+  it('nephilim daimah should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.MALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withRace(Race.HUMANO)
+      .withNephilim(Nephilim.DAIMAH)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.DAIMAH);
+
+    expect(sheet.additionalInfo).to.contain("Sentir el bosque.");
+    expect(sheet.additionalInfo).to.contain("Movimiento por los bosques.");
+    expect(sheet.additionalInfo).to.contain("Ver la esencia.");
+    expect(sheet.additionalInfo).to.contain("Naturaleza curativa.");
+    expect(sheet.size).to.equal(5);
+    expect(sheet.expPenalizator).to.equal(-3);
+  })
+
+  it('male nephilim duk\'zarist should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.MALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withNephilim(Nephilim.DUK_ZARIST)
+      .withRace(Race.HUMANO)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.DUK_ZARIST);
+
+    expect(sheet.regen).to.equal(1);
+    expect(sheet.rf).to.equal(30);
+    expect(sheet.re).to.equal(25);
+    expect(sheet.rv).to.equal(25);
+    expect(sheet.rm).to.equal(65);
+    expect(sheet.rp).to.equal(75);
+    expect(sheet.additionalInfo).to.contain("Desequilibrio hacia la oscuridad.");
+    expect(sheet.additionalInfo).to.contain("Aguante a la muerte.");
+    expect(sheet.additionalInfo).to.contain("Necesidades limitadas.");
+    expect(sheet.additionalInfo).to.contain("Presentir lo oscuro y lo luminoso.");
+    expect(sheet.additionalInfo).to.contain("Vision nocturna.");
+    expect(sheet.additionalInfo).to.contain("Devoción al Fuego: Si desarrolla sus habilidades mentales, tiene la obligación de adquirir como primera disciplina la Piroquinesis.");
+    expect(sheet.additionalInfo).to.contain("Cuerpos perfectos: La esencia de los Duk´zarist impide que el cuerpo desarrolle ningún tipo de malformación natural. El Nephilim no puede elegir ninguna de las siguientes desventajas: Miembro atrofiado, Salud enfermiza, Vulnerabilidad a los venenos, Miopía, Debilidad física, Enfermedad grave, Mudo, Ciego o Sordo.");
+    expect(sheet.additionalInfo).to.contain("Alergia al metal.");
+    expect(sheet.expPenalizator).to.equal(-5);
+  })
+
+  it('female nephilim duk\'zarist should add his own advantages', () => {
+    const sheet: Sheet = Sheet.builder
+      .withName("BANANA NAME")
+      .withSex(Sex.FEMALE)
+      .withAppearance(10)
+      .withAgi(1)
+      .withCon(2)
+      .withDes(3)
+      .withFue(4)
+      .withInt(20)
+      .withPer(8)
+      .withPod(12)
+      .withVol(15)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withNephilim(Nephilim.DUK_ZARIST)
+      .withRace(Race.HUMANO)
+      .withGnosis(10)
+      .build();
+
+    expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.DUK_ZARIST);
+
+    expect(sheet.regen).to.equal(1);
+    expect(sheet.rf).to.equal(25);
+    expect(sheet.re).to.equal(25);
+    expect(sheet.rv).to.equal(25);
+    expect(sheet.rm).to.equal(70);
+    expect(sheet.rp).to.equal(75);
+    expect(sheet.additionalInfo).to.contain("Desequilibrio hacia la oscuridad.");
+    expect(sheet.additionalInfo).to.contain("Aguante a la muerte.");
+    expect(sheet.additionalInfo).to.contain("Necesidades limitadas.");
+    expect(sheet.additionalInfo).to.contain("Presentir lo oscuro y lo luminoso.");
+    expect(sheet.additionalInfo).to.contain("Vision nocturna.");
+    expect(sheet.additionalInfo).to.contain("Devoción al Fuego: Si desarrolla sus habilidades mentales, tiene la obligación de adquirir como primera disciplina la Piroquinesis.");
+    expect(sheet.additionalInfo).to.contain("Cuerpos perfectos: La esencia de los Duk´zarist impide que el cuerpo desarrolle ningún tipo de malformación natural. El Nephilim no puede elegir ninguna de las siguientes desventajas: Miembro atrofiado, Salud enfermiza, Vulnerabilidad a los venenos, Miopía, Debilidad física, Enfermedad grave, Mudo, Ciego o Sordo.");
+    expect(sheet.additionalInfo).to.contain("Alergia al metal.");
+    expect(sheet.expPenalizator).to.equal(-5);
   })
 });

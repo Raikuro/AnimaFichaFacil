@@ -6,5 +6,5 @@ export class CalculatedValue {
     constructor(private _function:(sheet:Sheet) => number, private _sheet:Sheet) {}
 
     get value(){ return this._function(this._sheet) + this._modifier; }
-    set value(newValue:number){ this._modifier = newValue - this.value; }
+    set value(newValue:number){ this._modifier += newValue - this.value; }
 }

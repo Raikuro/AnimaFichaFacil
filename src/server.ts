@@ -3,6 +3,7 @@ import { Sheet } from './model/Sheet';
 import { Clazz } from './model/Clazz';
 import { Race } from './model/Race';
 import { Nephilim } from './model/Nephilim';
+import { Sex } from './model/Sex';
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -17,6 +18,7 @@ server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
   console.log(Sheet.builder
     .withName("BANANA NAME")
+    .withSex(Sex.MALE)
     .withAppearance(10)
     .withAgi(1)
     .withCon(2)
