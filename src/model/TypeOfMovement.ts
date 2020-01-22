@@ -1,14 +1,9 @@
 export class TypeOfMovement{
-    private readonly type:number;
     private _maximumDistancePerAssault:()=>number = () => undefined;
 
-    public constructor(type:number){
-        this.type = type;
-    }
+    public constructor(private readonly _type:number){}
 
-    public static getTypeOfMovement(agi:number):TypeOfMovement{
-        return new TypeOfMovement(agi)
-    }
+    public static getTypeOfMovement(agi:number):TypeOfMovement{ return new TypeOfMovement(agi); }
 
     public get maximumDistancePerAssault():number { return this._maximumDistancePerAssault(); }
 

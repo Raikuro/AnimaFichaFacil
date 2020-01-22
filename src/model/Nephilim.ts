@@ -25,10 +25,6 @@ export class Nephilim implements BaseComand {
    };
 
    private static jayan(sheet: Sheet): Sheet {
-      // THIS WORKS
-
-      // sheet.fueFinal += 1;
-      // sheet.size += 2;
       sheet.size += 2;
       sheet.fueFinal += 1;
       

@@ -3,12 +3,10 @@ import { Clazz } from "./Clazz";
 import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
 import { TypeOfMovement } from "./TypeOfMovement";
-import { getter, field } from '../utils/SheetDecorators';
+import { getter, calculatedValue } from '../utils/SheetDecorators';
 import { SheetBuilder } from './SheetBuilder';
 
 export class Sheet {
-
-    // public withName(name:string):Sheet { return new Sheet(this.name, this.appearance, this.agi, this.con, this.des, this.fue, this.int, this.per, this.pod, this.vol, this.level, this.clazz, this.race, this.nephilim); };
 
     public readonly applyNephilim = (): Sheet => {
         return fold<Nephilim, Sheet>(() => this, nephilim => nephilim.apply(this))(this.nephilim);
@@ -49,53 +47,53 @@ export class Sheet {
     @getter pod: number;
     @getter vol: number;
 
-    @field((sheet: Sheet) => sheet.agi) agiFinal: number;
-    @field((sheet: Sheet) => sheet.con) conFinal: number;
-    @field((sheet: Sheet) => sheet.des) desFinal: number;
-    @field((sheet: Sheet) => sheet.fue) fueFinal: number;
-    @field((sheet: Sheet) => sheet.int) intFinal: number;
-    @field((sheet: Sheet) => sheet.per) perFinal: number;
-    @field((sheet: Sheet) => sheet.pod) podFinal: number;
-    @field((sheet: Sheet) => sheet.vol) volFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.agi) agiFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.con) conFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.des) desFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.fue) fueFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.int) intFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.per) perFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.pod) podFinal: number;
+    @calculatedValue((sheet: Sheet) => sheet.vol) volFinal: number;
 
-    @field((sheet: Sheet) => sheet.findBonus(sheet.agiFinal)) agiBonus: number;
-    @field((sheet: Sheet) => sheet.findBonus(sheet.conFinal)) conBonus: number;
-    @field((sheet: Sheet) => sheet.findBonus(sheet.desFinal)) desBonus: number;
-    @field((sheet: Sheet) => sheet.findBonus(sheet.fueFinal)) fueBonus: number;
-    @field((sheet: Sheet) => sheet.findBonus(sheet.intFinal)) intBonus: number;
-    @field((sheet: Sheet) => sheet.findBonus(sheet.perFinal)) perBonus: number;
-    @field((sheet: Sheet) => sheet.findBonus(sheet.podFinal)) podBonus: number;
-    @field((sheet: Sheet) => sheet.findBonus(sheet.volFinal)) volBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.agiFinal)) agiBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.conFinal)) conBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.desFinal)) desBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.fueFinal)) fueBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.intFinal)) intBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.perFinal)) perBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.podFinal)) podBonus: number;
+    @calculatedValue((sheet: Sheet) => sheet.findBonus(sheet.volFinal)) volBonus: number;
 
-    @field((sheet: Sheet) => sheet.fueFinal + sheet.conFinal) size: number;
-    @field((sheet: Sheet) => 20 + sheet.conFinal * 10 + sheet.conBonus) totalLifePoints: number;
-    @field((sheet: Sheet) => sheet.totalLifePoints) currentLifePoints: number;
-    @field((sheet: Sheet) =>
+    @calculatedValue((sheet: Sheet) => sheet.fueFinal + sheet.conFinal) size: number;
+    @calculatedValue((sheet: Sheet) => 20 + sheet.conFinal * 10 + sheet.conBonus) totalLifePoints: number;
+    @calculatedValue((sheet: Sheet) => sheet.totalLifePoints) currentLifePoints: number;
+    @calculatedValue((sheet: Sheet) =>
         sheet.conFinal < 3 ? 0 :
             sheet.conFinal < 8 ? 1 :
                 sheet.conFinal < 9 ? 2 :
                     sheet.conFinal - 7) regen: number
-    @field((sheet: Sheet) => 20 + sheet.desBonus + sheet.agiBonus) iniciative: number;
-    @field((sheet: Sheet) => sheet.conFinal) fatiguePoints: number;
-    @field((sheet: Sheet) => sheet.fatiguePoints) currentFatiguePoints: number;
-    @field((sheet: Sheet) => TypeOfMovement.getTypeOfMovement(sheet.agiFinal)) typeOfMovement: TypeOfMovement;
+    @calculatedValue((sheet: Sheet) => 20 + sheet.desBonus + sheet.agiBonus) iniciative: number;
+    @calculatedValue((sheet: Sheet) => sheet.conFinal) fatiguePoints: number;
+    @calculatedValue((sheet: Sheet) => sheet.fatiguePoints) currentFatiguePoints: number;
+    @calculatedValue((sheet: Sheet) => sheet.agiFinal) typeOfMovement: TypeOfMovement;
 
-    @field((sheet: Sheet) => sheet.totalPDs / 20) presence;
-    @field((sheet: Sheet) => sheet.presence + sheet.conBonus) rf: number;
-    @field((sheet: Sheet) => sheet.presence + sheet.conBonus) re: number;
-    @field((sheet: Sheet) => sheet.presence + sheet.conBonus) rv: number;
-    @field((sheet: Sheet) => sheet.presence + sheet.podBonus) rm: number;
-    @field((sheet: Sheet) => sheet.presence + sheet.volBonus) rp: number;
+    @calculatedValue((sheet: Sheet) => sheet.totalPDs / 20) presence;
+    @calculatedValue((sheet: Sheet) => sheet.presence + sheet.conBonus) rf: number;
+    @calculatedValue((sheet: Sheet) => sheet.presence + sheet.conBonus) re: number;
+    @calculatedValue((sheet: Sheet) => sheet.presence + sheet.conBonus) rv: number;
+    @calculatedValue((sheet: Sheet) => sheet.presence + sheet.podBonus) rm: number;
+    @calculatedValue((sheet: Sheet) => sheet.presence + sheet.volBonus) rp: number;
 
-    @field((sheet: Sheet) => sheet.level === 0 ? 400 : 500 + sheet.level * 100) totalPDs:number;
-    @field((sheet: Sheet) => 3) availablePcs:number;
-    @field((sheet: Sheet) => 0) exp:number;
-    @field((sheet: Sheet) => Math.floor(sheet.level / 2)) availableAttributeUp:number;
+    @calculatedValue((sheet: Sheet) => sheet.level === 0 ? 400 : 500 + sheet.level * 100) totalPDs: number;
+    @calculatedValue((sheet: Sheet) => 3) availablePcs: number;
+    @calculatedValue((sheet: Sheet) => 0) exp: number;
+    @calculatedValue((sheet: Sheet) => Math.floor(sheet.level / 2)) availableAttributeUp: number;
 
     @getter additionalInfo: string[];
     public addAdditionalInfo = (newInfo: string) => this._additionalInfo.push(newInfo);
 
-    @field((sheet: Sheet) => sheet.gnosis - sheet.race.natura) naturaPlus;
+    @calculatedValue((sheet: Sheet) => sheet.gnosis - sheet.race.natura) naturaPlus;
 
     public constructor(
         private _name: string,

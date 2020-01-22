@@ -1,3 +1,6 @@
+import { CalculatedValue } from "../model/CalculatedValue";
+import { Sheet } from "../model/Sheet";
+
 export function getter(target: Object, name: string) {
     return Object.defineProperty(target, name, {
         get: function () { return this["_" + name]; },
@@ -5,17 +8,23 @@ export function getter(target: Object, name: string) {
     });
 }
 
-export function field(defaultFunction?) {
-
-    function getOrInitialize<A>(attr: A, resultIfUndefined: A): A {
-        return attr ? attr : resultIfUndefined;
-    }
-
+export function calculatedValue(defaultFunction:(sheet:Sheet)=>number) {
     return (target: Object, name: string) => {
         Object.defineProperty(target, name, {
-            get: function () { return getOrInitialize(this["_" + name], defaultFunction(this)); },
-            set: function (value) { this["_" + name] = value; },
+            get: function () {
+                if (!this["_" + name]) {
+                    this["_" + name] = new CalculatedValue(defaultFunction, this);
+                }
+                return this["_" + name].value;
+            },
+            set: function (value) {
+                if (!this["_" + name]) {
+                    this["_" + name] = new CalculatedValue(defaultFunction, this);
+                }
+                this["_" + name].value = value;
+            },
             configurable: true
         });
+
     }
 }
