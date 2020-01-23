@@ -78,7 +78,7 @@ export class Sheet {
     @calculatedValue((sheet: Sheet) => 20 + sheet.desBonus + sheet.agiBonus) iniciative: number;
     @calculatedValue((sheet: Sheet) => sheet.conFinal) fatiguePoints: number;
     @calculatedValue((sheet: Sheet) => sheet.fatiguePoints) currentFatiguePoints: number;
-    @calculatedValue((sheet: Sheet) => sheet.agiFinal) typeOfMovement: TypeOfMovement;
+    @calculatedValue((sheet: Sheet) => sheet.agiFinal) typeOfMovement: number;
 
     @calculatedValue((sheet: Sheet) => sheet.totalPDs / 20) presence;
     @calculatedValue((sheet: Sheet) => sheet.presence + sheet.conBonus) rf: number;

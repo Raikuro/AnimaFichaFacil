@@ -4,8 +4,8 @@ import { Race } from "../../src/model/Race";
 import { Nephilim } from "../../src/model/Nephilim";
 import { expect } from 'chai';
 import { fold } from 'fp-ts/lib/Option'
-import 'mocha';
 import { Sex } from "../../src/model/Sex";
+import 'mocha';
 
 function identity<A>(a: A): A { return a; }
 
@@ -63,6 +63,7 @@ describe('Sheet', () => {
     expect(sheet.iniciative).to.equal(-20);
     expect(sheet.fatiguePoints).to.equal(2);
     expect(sheet.currentFatiguePoints).to.equal(2);
+    expect(sheet.typeOfMovement).to.equal(1);
 
     expect(sheet.presence).to.equal(30);
     expect(sheet.rf).to.equal(10);
