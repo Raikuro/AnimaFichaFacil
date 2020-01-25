@@ -1,6 +1,6 @@
-import { Sheet } from "./Sheet";
 import { BaseComand } from "./BaseComand";
 import { Sex } from "./Sex";
+import { Sheet } from "./Sheet";
 
 export class Nephilim implements BaseComand {
 
