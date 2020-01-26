@@ -4,8 +4,7 @@ import 'mocha';
 import { Nephilim } from "../../src/model/Nephilim";
 import { Sex } from "../../src/model/Sex";
 import { Sheet } from "../../src/model/Sheet";
-
-function identity<A>(a: A): A { return a; }
+import { identity } from 'fp-ts/lib/function';
 
 export default function suite() {
     it('nephilim sylvain should add his own advantages', () => {
