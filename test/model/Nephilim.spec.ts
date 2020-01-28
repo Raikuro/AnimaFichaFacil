@@ -5,21 +5,43 @@ import { Nephilim } from "../../src/model/Nephilim";
 import { Sex } from "../../src/model/Sex";
 import { Sheet } from "../../src/model/Sheet";
 import { identity } from 'fp-ts/lib/function';
+import { Clazz } from '../../src/model/Clazz';
+import { Race } from '../../src/model/Race';
 
 export default function suite() {
-    it('nephilim sylvain should add his own advantages', () => {
+
+  beforeEach(() => {
+    this.sheetBuilder = Sheet.builder()
+      .withName("BANANA NAME")
+      .withSex(Sex.MALE)
+      .withAppearance(10)
+      .withAgi(5)
+      .withCon(5)
+      .withDes(5)
+      .withFue(5)
+      .withInt(5)
+      .withPer(5)
+      .withPod(5)
+      .withVol(5)
+      .withLevel(1)
+      .withClazz(Clazz.GUERRERO)
+      .withRace(Race.HUMANO)
+      .withGnosis(10)
+  });
+
+  it('nephilim sylvain should add his own advantages', () => {
     const sheet: Sheet = this.sheetBuilder
       .withNephilim(Nephilim.SYLVAIN)
       .build();
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.SYLVAIN);
 
-    expect(sheet.rf).to.equal(15);
-    expect(sheet.re).to.equal(30);
-    expect(sheet.rv).to.equal(15);
-    expect(sheet.rm).to.equal(60);
-    expect(sheet.rp).to.equal(70);
-    expect(sheet.regen).to.equal(1);
+    expect(sheet.rf).to.equal(35);
+    expect(sheet.re).to.equal(50);
+    expect(sheet.rv).to.equal(35);
+    expect(sheet.rm).to.equal(40);
+    expect(sheet.rp).to.equal(40);
+    expect(sheet.regen).to.equal(2);
 
     expect(sheet.additionalInfo).to.contain("Desequilibrio hacia la luz");
     expect(sheet.additionalInfo).to.contain("Presentir lo oscuro y lo luminososo.");
@@ -34,11 +56,11 @@ export default function suite() {
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.JAYAN);
 
-    expect(sheet.size).to.equal(9);
-    expect(sheet.fatiguePoints).to.equal(3);
-    expect(sheet.rf).to.equal(25);
-    expect(sheet.fueFinal).to.equal(5);
-    expect(sheet.rm).to.equal(40);
+    expect(sheet.size).to.equal(13);
+    expect(sheet.fatiguePoints).to.equal(6);
+    expect(sheet.rf).to.equal(45);
+    expect(sheet.fueFinal).to.equal(6);
+    expect(sheet.rm).to.equal(20);
 
     expect(sheet.additionalInfo).to.contain("No puede escoger tamaño desigual para disminuir su tamaño.");
     expect(sheet.additionalInfo).to.contain("No puede escoger reducir FUE dos puntos.");
@@ -53,7 +75,7 @@ export default function suite() {
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.D_ANJAYNI);
 
-    expect(sheet.additionalInfo).to.contain("Indetectibilidad: Aprende la habilidad Ocultacion del Ki y tiene un bono de +30.");
+    expect(sheet.additionalInfo).to.contain("Indetectibilidad: Aprende la habilidad Ocultacion del Ki.");
     expect(sheet.additionalInfo).to.contain("Olvido.");
     expect(sheet.additionalInfo).to.contain("Susurros silenciosos.");
     expect(sheet.additionalInfo).to.contain("Pasar sin dejar rastro.");
@@ -85,7 +107,7 @@ export default function suite() {
     expect(sheet.additionalInfo).to.contain("Movimiento por los bosques.");
     expect(sheet.additionalInfo).to.contain("Ver la esencia.");
     expect(sheet.additionalInfo).to.contain("Naturaleza curativa.");
-    expect(sheet.size).to.equal(5);
+    expect(sheet.size).to.equal(9);
     expect(sheet.expPenalizator).to.equal(-3);
   })
 
@@ -96,12 +118,12 @@ export default function suite() {
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.DUK_ZARIST);
 
-    expect(sheet.regen).to.equal(1);
-    expect(sheet.rf).to.equal(30);
-    expect(sheet.re).to.equal(25);
-    expect(sheet.rv).to.equal(25);
-    expect(sheet.rm).to.equal(65);
-    expect(sheet.rp).to.equal(75);
+    expect(sheet.regen).to.equal(2);
+    expect(sheet.rf).to.equal(50);
+    expect(sheet.re).to.equal(45);
+    expect(sheet.rv).to.equal(45);
+    expect(sheet.rm).to.equal(45);
+    expect(sheet.rp).to.equal(45);
     expect(sheet.additionalInfo).to.contain("Desequilibrio hacia la oscuridad.");
     expect(sheet.additionalInfo).to.contain("Aguante a la muerte.");
     expect(sheet.additionalInfo).to.contain("Necesidades limitadas.");
@@ -121,12 +143,12 @@ export default function suite() {
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.DUK_ZARIST);
 
-    expect(sheet.regen).to.equal(1);
-    expect(sheet.rf).to.equal(25);
-    expect(sheet.re).to.equal(25);
-    expect(sheet.rv).to.equal(25);
-    expect(sheet.rm).to.equal(70);
-    expect(sheet.rp).to.equal(75);
+    expect(sheet.regen).to.equal(2);
+    expect(sheet.rf).to.equal(45);
+    expect(sheet.re).to.equal(45);
+    expect(sheet.rv).to.equal(45);
+    expect(sheet.rm).to.equal(50);
+    expect(sheet.rp).to.equal(45);
     expect(sheet.additionalInfo).to.contain("Desequilibrio hacia la oscuridad.");
     expect(sheet.additionalInfo).to.contain("Aguante a la muerte.");
     expect(sheet.additionalInfo).to.contain("Necesidades limitadas.");
@@ -145,7 +167,7 @@ export default function suite() {
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.TURAK);
 
-    expect(sheet.iniciative).to.equal(-30);
+    expect(sheet.iniciative).to.equal(10);
     expect(sheet.additionalInfo).to.contain("Armas naturales: Obtiene armas naturales con daño base 30+bono de FUE y atacan en FIL.");
     expect(sheet.additionalInfo).to.contain("Memoria racial.");
     expect(sheet.additionalInfo).to.contain("Piel resistente: Obtiene armadura natural 1 contra FIL, CON, PEN, CAL.");
@@ -160,11 +182,11 @@ export default function suite() {
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.DEVAH);
 
-    expect(sheet.rf).to.equal(0);
-    expect(sheet.re).to.equal(0);
-    expect(sheet.rv).to.equal(10);
-    expect(sheet.rm).to.equal(60);
-    expect(sheet.rp).to.equal(70);
+    expect(sheet.rf).to.equal(20);
+    expect(sheet.re).to.equal(20);
+    expect(sheet.rv).to.equal(30);
+    expect(sheet.rm).to.equal(40);
+    expect(sheet.rp).to.equal(40);
     expect(sheet.additionalInfo).to.contain("El ojo del alma.");
     expect(sheet.additionalInfo).to.contain("Lazos existenciales: +10 a Convocar y Desconvocar.");
     expect(sheet.expPenalizator).to.equal(-3);
@@ -176,9 +198,9 @@ export default function suite() {
       .build();
 
     expect(fold<Nephilim, any>(undefined, identity)(sheet.nephilim)).to.equal(Nephilim.VETALA);
-    
-    expect(sheet.regen).to.equal(1);
-    expect(sheet.re).to.equal(-10);
+
+    expect(sheet.regen).to.equal(2);
+    expect(sheet.re).to.equal(10);
     expect(sheet.additionalInfo).to.contain("Aguante al daño crítico.");
     expect(sheet.additionalInfo).to.contain("Éxtasis sanguíneo.");
     expect(sheet.additionalInfo).to.contain("Piel fotosensible.");

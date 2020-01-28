@@ -2,7 +2,6 @@ import { fold, Option } from 'fp-ts/lib/Option';
 import { Clazz } from "./Clazz";
 import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
-import { TypeOfMovement } from "./TypeOfMovement";
 import { getter, calculatedValue } from '../utils/SheetDecorators';
 import { SheetBuilder } from './SheetBuilder';
 import { Sex } from './Sex';
@@ -13,8 +12,14 @@ export class Sheet {
         return fold<Nephilim, Sheet>(() => this, nephilim => nephilim.apply(this))(this.nephilim);
     }
 
+    public readonly applyRace = (): Sheet => {
+        return this.race.apply(this);
+    }
+
     public readonly applyAll = (): Sheet => {
-        return this.applyNephilim();
+        return this
+            .applyRace()
+            .applyNephilim();
     }
 
     private readonly findBonus = (attribute: number): number => {
@@ -29,7 +34,7 @@ export class Sheet {
         return result;
     }
 
-    public static builder: SheetBuilder = new SheetBuilder();
+    public static builder = () => new SheetBuilder();
 
     @getter name: number;
     @getter sex: Sex;
@@ -92,6 +97,7 @@ export class Sheet {
     @calculatedValue((sheet: Sheet) => 0) exp: number;
     @calculatedValue((sheet: Sheet) => 0) expPenalizator: number;
     @calculatedValue((sheet: Sheet) => Math.floor(sheet.level / 2)) availableAttributeUp: number;
+    @calculatedValue((sheet: Sheet) => 0) levelMod: number;
 
     @getter additionalInfo: string[];
     public addAdditionalInfo = (newInfo: string) => this._additionalInfo.push(newInfo);

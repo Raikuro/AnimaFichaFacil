@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-  console.log(Sheet.builder
+  console.log(Sheet.builder()
     .withName("BANANA NAME")
     .withSex(Sex.MALE)
     .withAppearance(10)

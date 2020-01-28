@@ -38,7 +38,7 @@ export class Nephilim implements BaseComand {
    };
 
    private static dAnjayni(sheet: Sheet): Sheet {
-      sheet.addAdditionalInfo("Indetectibilidad: Aprende la habilidad Ocultacion del Ki y tiene un bono de +30.");
+      sheet.addAdditionalInfo("Indetectibilidad: Aprende la habilidad Ocultacion del Ki.");
       sheet.addAdditionalInfo("Olvido.");
       sheet.addAdditionalInfo("Susurros silenciosos.");
       sheet.addAdditionalInfo("Pasar sin dejar rastro.");
