@@ -55,6 +55,7 @@ export default function suite() {
     
     expect(sheet.expPenalizator).to.equal(-3);
     expect(sheet.levelMod).to.equal(2);
+    expect(sheet.naturaPlus).to.equal(5);
   })
 
   //   it('jayan should add his own advantages', () => {
@@ -90,6 +91,7 @@ export default function suite() {
       expect(sheet.additionalInfo).to.contain("Nunca puede tener una apariencia inferior a 3 o superior a 7.");
       expect(sheet.expPenalizator).to.equal(-3);
       expect(sheet.levelMod).to.equal(1);
+      expect(sheet.naturaPlus).to.equal(5);
     })
 
     it('ebudan should add his own advantages', () => {
@@ -103,6 +105,7 @@ export default function suite() {
       expect(sheet.additionalInfo).to.contain("Alas de Serafín.");
       expect(sheet.additionalInfo).to.contain("Esencia celestial.");
       expect(sheet.levelMod).to.equal(1);
+      expect(sheet.naturaPlus).to.equal(0);
     })
 
   //   it('daimah should add his own advantages', () => {
