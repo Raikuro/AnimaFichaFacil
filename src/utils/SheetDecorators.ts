@@ -8,7 +8,14 @@ export function getter(target: Object, name: string) {
     });
 }
 
-export function calculatedValue(defaultFunction:(sheet:Sheet)=>number) {
+export function setter(target: Object, name: string) {
+    return Object.defineProperty(target, name, {
+        set: function (newValue) { this["_" + name] = newValue; },
+        configurable: true
+    });
+}
+
+export function calculatedValue(defaultFunction: (sheet: Sheet) => number) {
     return (target: Object, name: string) => {
         Object.defineProperty(target, name, {
             get: function () {
@@ -28,3 +35,20 @@ export function calculatedValue(defaultFunction:(sheet:Sheet)=>number) {
 
     }
 }
+
+export function registerProperty(target: object, name: string, metadataKey: string): void {
+    let properties: string[] = Reflect.getMetadata(metadataKey, target);
+    if (properties) {
+      properties.push(name);
+    } else {
+      properties = [name];
+      Reflect.defineMetadata(metadataKey, properties, target);
+    }
+  }
+  
+export function getDecoratedProperties(origin: object, metadataKey: string): string[] {
+    const properties: string[] = Reflect.getMetadata(metadataKey, origin);
+    const result = [];
+    properties.forEach(key => result.push(key));
+    return result;
+  }

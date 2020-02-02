@@ -2,9 +2,10 @@ import { fold, Option } from 'fp-ts/lib/Option';
 import { Clazz } from "./Clazz";
 import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
-import { getter, calculatedValue } from '../utils/SheetDecorators';
+import { getter, calculatedValue, setter, registerProperty, getDecoratedProperties } from '../utils/SheetDecorators';
 import { SheetBuilder } from './SheetBuilder';
 import { Sex } from './Sex';
+import 'reflect-metadata';
 
 export class Sheet {
 
@@ -36,23 +37,37 @@ export class Sheet {
 
     public static builder = () => new SheetBuilder();
 
-    @getter name: number;
-    @getter sex: Sex;
-    @getter race: Race;
-    @getter nephilim: Option<Nephilim>;
-    @getter level: number;
-    @getter appearance: number;
-    @getter clazz: Clazz;
-    @getter gnosis: number;
+    @getter @setter name: string;
 
-    @getter agi: number;
-    @getter con: number;
-    @getter des: number;
-    @getter fue: number;
-    @getter int: number;
-    @getter per: number;
-    @getter pod: number;
-    @getter vol: number;
+    @getter @important sex: Sex;
+
+    @getter @important race: Race;
+
+    @getter @important nephilim: Option<Nephilim>;
+
+    @getter @important level: number;
+
+    @getter @setter appearance: number;
+    
+    @getter @important clazz: Clazz;
+
+    @getter @important gnosis: number;
+    
+    @getter @important agi: number;
+    
+    @getter @important con: number;
+    
+    @getter @important des: number;
+    
+    @getter @important fue: number;
+    
+    @getter @important int: number;
+    
+    @getter @important per: number;
+    
+    @getter @important pod: number;
+    
+    @getter @important vol: number;
 
     @calculatedValue((sheet: Sheet) => sheet.agi) agiFinal: number;
     @calculatedValue((sheet: Sheet) => sheet.con) conFinal: number;
@@ -99,7 +114,9 @@ export class Sheet {
     @calculatedValue((sheet: Sheet) => Math.floor(sheet.level / 2)) availableAttributeUp: number;
     @calculatedValue((sheet: Sheet) => 0) levelMod: number;
 
-    @getter additionalInfo: string[];
+    public get additionalInfo(){
+        return this["_additionalInfo"] ? this["_additionalInfo"] : [];
+    }
     public addAdditionalInfo = (newInfo: string) => this._additionalInfo.push(newInfo);
 
     @calculatedValue((sheet: Sheet) => sheet.gnosis - sheet.race.natura) naturaPlus;
@@ -125,4 +142,25 @@ export class Sheet {
     ) {
         this.applyAll();
     }
+}
+
+function important(target: Object, name: string) {
+    Object.defineProperty(target, name, {
+        set: function (newValue) {
+            this["_" + name] = newValue;
+            let importantProperties:string[] = getDecoratedProperties(this, "important")
+            importantProperties.push("name")
+            importantProperties.push("appearance")
+            let allPropertiesName:string[] = Object.getOwnPropertyNames(this).filter(name => name[0] === "_")
+            allPropertiesName.forEach(name => {
+                if(!importantProperties.includes(name.slice(1))){
+                    this[name] = undefined;
+                }
+                return name;
+            });
+            this.applyAll();
+        },
+        configurable: true
+    });
+    return registerProperty(target, name, 'important');
 }
