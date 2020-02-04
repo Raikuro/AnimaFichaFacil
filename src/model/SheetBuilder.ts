@@ -62,13 +62,8 @@ export class SheetBuilder {
         return this;
     }
 
-    public withLevel(level: number): SheetBuilder {
-        this._level = level;
-        return this;
-    }
-
-    public withClazz(clazz: Clazz): SheetBuilder {
-        this._clazz = clazz;
+    public withClasses(classes: Clazz[]): SheetBuilder {
+        this._classes = classes;
         return this;
     }
 
@@ -99,8 +94,7 @@ export class SheetBuilder {
         private _per?: number,
         private _pod?: number,
         private _vol?: number,
-        private _level?: number,
-        private _clazz?: Clazz,
+        private _classes?: Clazz[],
         private _race?: Race,
         private _nephilim: Option<Nephilim> = none,
         private _gnosis?: number,
@@ -119,8 +113,7 @@ export class SheetBuilder {
             this._per,
             this._pod,
             this._vol,
-            this._level,
-            this._clazz,
+            this._classes,
             this._race,
             this._nephilim,
             this._gnosis

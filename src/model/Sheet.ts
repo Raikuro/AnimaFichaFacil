@@ -9,18 +9,23 @@ import 'reflect-metadata';
 
 export class Sheet {
 
-    public readonly applyNephilim = (): Sheet => {
+    private readonly applyNephilim = (): Sheet => {
         return fold<Nephilim, Sheet>(() => this, nephilim => nephilim.apply(this))(this.nephilim);
     }
 
-    public readonly applyRace = (): Sheet => {
+    private readonly applyRace = (): Sheet => {
         return this.race.apply(this);
     }
 
-    public readonly applyAll = (): Sheet => {
+    private readonly applyClasses = (): Sheet => {
+        return this.classes.reduce((acc, func) => func.apply(acc), this);
+    }
+
+    private readonly applyAll = (): Sheet => {
         return this
             .applyRace()
-            .applyNephilim();
+            .applyNephilim()
+            .applyClasses();
     }
 
     private readonly findBonus = (attribute: number): number => {
@@ -45,29 +50,32 @@ export class Sheet {
 
     @getter @important nephilim: Option<Nephilim>;
 
-    @getter @important level: number;
-
     @getter @setter appearance: number;
-    
-    @getter @important clazz: Clazz;
+
+    @getter @important classes: Clazz[];
 
     @getter @important gnosis: number;
-    
+
     @getter @important agi: number;
-    
+
     @getter @important con: number;
-    
+
     @getter @important des: number;
-    
+
     @getter @important fue: number;
-    
+
     @getter @important int: number;
-    
+
     @getter @important per: number;
-    
+
     @getter @important pod: number;
-    
+
     @getter @important vol: number;
+
+    @calculatedValue((sheet: Sheet) => sheet.classes
+        .map(clazz => clazz.levels)
+        .reduce((accumulator, current) => accumulator + current, 0)
+    ) level: number;
 
     @calculatedValue((sheet: Sheet) => sheet.agi) agiFinal: number;
     @calculatedValue((sheet: Sheet) => sheet.con) conFinal: number;
@@ -114,7 +122,7 @@ export class Sheet {
     @calculatedValue((sheet: Sheet) => Math.floor(sheet.level / 2)) availableAttributeUp: number;
     @calculatedValue((sheet: Sheet) => 0) levelMod: number;
 
-    public get additionalInfo(){
+    public get additionalInfo() {
         return this["_additionalInfo"] ? this["_additionalInfo"] : [];
     }
     public addAdditionalInfo = (newInfo: string) => this._additionalInfo.push(newInfo);
@@ -133,8 +141,7 @@ export class Sheet {
         private _per: number,
         private _pod: number,
         private _vol: number,
-        private _level: number,
-        private _clazz: Clazz,
+        private _classes: Clazz[],
         private _race: Race,
         private _nephilim: Option<Nephilim>,
         private _gnosis: number,
@@ -148,12 +155,12 @@ function important(target: Object, name: string) {
     Object.defineProperty(target, name, {
         set: function (newValue) {
             this["_" + name] = newValue;
-            let importantProperties:string[] = getDecoratedProperties(this, "important")
+            let importantProperties: string[] = getDecoratedProperties(this, "important")
             importantProperties.push("name")
             importantProperties.push("appearance")
-            let allPropertiesName:string[] = Object.getOwnPropertyNames(this).filter(name => name[0] === "_")
+            let allPropertiesName: string[] = Object.getOwnPropertyNames(this).filter(name => name[0] === "_")
             allPropertiesName.forEach(name => {
-                if(!importantProperties.includes(name.slice(1))){
+                if (!importantProperties.includes(name.slice(1))) {
                     this[name] = undefined;
                 }
                 return name;

@@ -3,7 +3,7 @@ import 'mocha';
 import { Race } from "../../src/model/Race";
 import { Sex } from "../../src/model/Sex";
 import { Sheet } from "../../src/model/Sheet";
-import { Clazz } from '../../src/model/Clazz';
+import { Clazz, GUERRERO } from '../../src/model/Clazz';
 
 export default function suite() {
 
@@ -20,8 +20,7 @@ export default function suite() {
       .withPer(5)
       .withPod(5)
       .withVol(5)
-      .withLevel(1)
-      .withClazz(Clazz.GUERRERO)
+      .withClasses([new Clazz(GUERRERO, 1)])
       .withGnosis(10)
   });
 

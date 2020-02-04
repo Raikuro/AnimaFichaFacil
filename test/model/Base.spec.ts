@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { Sheet } from "../../src/model/Sheet";
 import { Sex } from "../../src/model/Sex";
 import { Race } from "../../src/model/Race";
-import { Clazz } from "../../src/model/Clazz";
+import { Clazz, GUERRERO } from "../../src/model/Clazz";
 
 export default function suite() {
 
@@ -19,8 +19,7 @@ export default function suite() {
       .withPer(8)
       .withPod(12)
       .withVol(15)
-      .withLevel(1)
-      .withClazz(Clazz.GUERRERO)
+      .withClasses([new Clazz(GUERRERO, 1)])
       .withRace(Race.HUMANO)
       .withGnosis(10)
   });
@@ -50,7 +49,7 @@ export default function suite() {
     expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
-    expect(sheet.clazz).to.equal(Clazz.GUERRERO);
+    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1)]);
     expect(sheet.level).to.equal(1);
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);
@@ -99,14 +98,14 @@ export default function suite() {
     expect(sheet.re).to.equal(20);
 
     expect(sheet.regen).to.equal(1);
-    
+
     expect(sheet.additionalInfo).to.contain("Un Sylvain no puede elegir las desventajas de Vulnerabilidad a la magia o Fácil posesión, Salud enfermiza, Vulnerable a los venenos o enfermedad grave incurable.");
     expect(sheet.additionalInfo).to.contain("Inhumano en todas las caracteristicas.");
     expect(sheet.additionalInfo).to.contain("Presentir lo oscuro y lo luminososo.");
     expect(sheet.additionalInfo).to.contain("Necesidades limitadas.");
     expect(sheet.additionalInfo).to.contain("Lazo hacia la luz.");
     expect(sheet.additionalInfo).to.contain("Obligación mágica o puede no cogerlo y ser Paria.");
-    
+
     expect(sheet.expPenalizator).to.equal(-3);
     expect(sheet.levelMod).to.equal(2);
     expect(sheet.naturaPlus).to.equal(5);
@@ -135,7 +134,7 @@ export default function suite() {
     expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
-    expect(sheet.clazz).to.equal(Clazz.GUERRERO);
+    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1)]);
     expect(sheet.level).to.equal(1);
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);

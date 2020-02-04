@@ -5,7 +5,7 @@ import { Nephilim } from "../../src/model/Nephilim";
 import { Sex } from "../../src/model/Sex";
 import { Sheet } from "../../src/model/Sheet";
 import { identity } from 'fp-ts/lib/function';
-import { Clazz } from '../../src/model/Clazz';
+import { Clazz, GUERRERO } from '../../src/model/Clazz';
 import { Race } from '../../src/model/Race';
 
 export default function suite() {
@@ -23,8 +23,7 @@ export default function suite() {
       .withPer(5)
       .withPod(5)
       .withVol(5)
-      .withLevel(1)
-      .withClazz(Clazz.GUERRERO)
+      .withClasses([new Clazz(GUERRERO, 1)])
       .withRace(Race.HUMANO)
       .withGnosis(10)
   });

@@ -1,6 +1,6 @@
 import * as http from 'http';
 import { Sheet } from './model/Sheet';
-import { Clazz } from './model/Clazz';
+import { Clazz, GUERRERO} from './model/Clazz';
 import { Race } from './model/Race';
 import { Nephilim } from './model/Nephilim';
 import { Sex } from './model/Sex';
@@ -28,8 +28,7 @@ server.listen(port, hostname, () => {
     .withPer(8)
     .withPod(12)
     .withVol(15)
-    .withLevel(1)
-    .withClazz(Clazz.GUERRERO)
+    .withClasses([new Clazz(GUERRERO, 1)])
     .withRace(Race.HUMANO)
     .withNephilim(Nephilim.SYLVAIN)
     .withGnosis(10)
