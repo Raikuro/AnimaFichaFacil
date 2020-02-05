@@ -6,6 +6,7 @@ import { getter, calculatedValue, setter, registerProperty, getDecoratedProperti
 import { SheetBuilder } from './SheetBuilder';
 import { Sex } from './Sex';
 import 'reflect-metadata';
+import { LinkedList } from '../utils/LinkedList';
 
 export class Sheet {
 
@@ -18,7 +19,9 @@ export class Sheet {
     }
 
     private readonly applyClasses = (): Sheet => {
-        return this.classes.reduce((acc, func) => func.apply(acc), this);
+        return this.classes
+            .toArray()
+            .reduce((acc, func) => func.apply(acc), this);
     }
 
     private readonly applyAll = (): Sheet => {
@@ -52,7 +55,7 @@ export class Sheet {
 
     @getter @setter appearance: number;
 
-    @getter @important classes: Clazz[];
+    @getter @important classes: LinkedList<Clazz>;
 
     @getter @important gnosis: number;
 
@@ -73,6 +76,7 @@ export class Sheet {
     @getter @important vol: number;
 
     @calculatedValue((sheet: Sheet) => sheet.classes
+        .toArray()
         .map(clazz => clazz.levels)
         .reduce((accumulator, current) => accumulator + current, 0)
     ) level: number;
@@ -141,7 +145,7 @@ export class Sheet {
         private _per: number,
         private _pod: number,
         private _vol: number,
-        private _classes: Clazz[],
+        private _classes: LinkedList<Clazz>,
         private _race: Race,
         private _nephilim: Option<Nephilim>,
         private _gnosis: number,

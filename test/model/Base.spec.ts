@@ -3,6 +3,7 @@ import { Sheet } from "../../src/model/Sheet";
 import { Sex } from "../../src/model/Sex";
 import { Race } from "../../src/model/Race";
 import { Clazz, GUERRERO } from "../../src/model/Clazz";
+import { LinkedList } from "../../src/utils/LinkedList";
 
 export default function suite() {
 
@@ -49,7 +50,7 @@ export default function suite() {
     expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
-    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1)]);
+    expect(sheet.classes.toArray()).to.eql([new Clazz(GUERRERO, 1)]);
     expect(sheet.level).to.equal(1);
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);
@@ -134,7 +135,7 @@ export default function suite() {
     expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
-    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1)]);
+    expect(sheet.classes.toArray()).to.eql([new Clazz(GUERRERO, 1)]);
     expect(sheet.level).to.equal(1);
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);

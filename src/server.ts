@@ -28,10 +28,9 @@ server.listen(port, hostname, () => {
     .withPer(8)
     .withPod(12)
     .withVol(15)
-    .withClasses([new Clazz(GUERRERO, 1)])
+    .withClasses([new Clazz(GUERRERO, 1), new Clazz(GUERRERO, 1), new Clazz(GUERRERO, 1), new Clazz(GUERRERO, 1)])
     .withRace(Race.HUMANO)
     .withNephilim(Nephilim.SYLVAIN)
     .withGnosis(10)
     .build();
-    console.log(sheet)
 });
