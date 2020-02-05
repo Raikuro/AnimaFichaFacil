@@ -2,7 +2,7 @@ import { fold, Option } from 'fp-ts/lib/Option';
 import { Clazz } from "./Clazz";
 import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
-import { getter, calculatedValue, setter, registerProperty, getDecoratedProperties } from '../utils/SheetDecorators';
+import { getter, calculatedValue, setter, registerProperty, getDecoratedProperties, important } from '../utils/SheetDecorators';
 import { SheetBuilder } from './SheetBuilder';
 import { Sex } from './Sex';
 import 'reflect-metadata';
@@ -153,25 +153,4 @@ export class Sheet {
     ) {
         this.applyAll();
     }
-}
-
-function important(target: Object, name: string) {
-    Object.defineProperty(target, name, {
-        set: function (newValue) {
-            this["_" + name] = newValue;
-            let importantProperties: string[] = getDecoratedProperties(this, "important")
-            importantProperties.push("name")
-            importantProperties.push("appearance")
-            let allPropertiesName: string[] = Object.getOwnPropertyNames(this).filter(name => name[0] === "_")
-            allPropertiesName.forEach(name => {
-                if (!importantProperties.includes(name.slice(1))) {
-                    this[name] = undefined;
-                }
-                return name;
-            });
-            this.applyAll();
-        },
-        configurable: true
-    });
-    return registerProperty(target, name, 'important');
 }
