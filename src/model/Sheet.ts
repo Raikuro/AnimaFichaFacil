@@ -2,11 +2,11 @@ import { fold, Option } from 'fp-ts/lib/Option';
 import { Clazz } from "./Clazz";
 import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
-import { getter, calculatedValue, setter, registerProperty, getDecoratedProperties, important } from '../utils/SheetDecorators';
+import { getter, calculatedValue, setter, getDecoratedProperties, importantSetter, important } from '../utils/SheetDecorators';
 import { SheetBuilder } from './SheetBuilder';
 import { Sex } from './Sex';
 import 'reflect-metadata';
-import { LinkedList } from '../utils/LinkedList';
+import { ClazzAgregator } from './ClazzAgregator';
 
 export class Sheet {
 
@@ -19,9 +19,7 @@ export class Sheet {
     }
 
     private readonly applyClasses = (): Sheet => {
-        return this.classes
-            .toArray()
-            .reduce((acc, func) => func.apply(acc), this);
+        return this._classes.apply(this);
     }
 
     private readonly applyAll = (): Sheet => {
@@ -45,41 +43,44 @@ export class Sheet {
 
     public static builder = () => new SheetBuilder();
 
-    @getter @setter name: string;
+    @important @getter @setter name: string;
 
-    @getter @important sex: Sex;
+    @getter @importantSetter sex: Sex;
 
-    @getter @important race: Race;
+    @getter @importantSetter race: Race;
 
-    @getter @important nephilim: Option<Nephilim>;
+    @getter @importantSetter nephilim: Option<Nephilim>;
 
-    @getter @setter appearance: number;
+    @important @getter @setter appearance: number;
 
-    @getter @important classes: LinkedList<Clazz>;
+    @important private _classes: ClazzAgregator;
+    public get classes(): Clazz[] {
+        return this._classes.toArray();
+    }
+    public set classes(classes: Clazz[]) {
+        this._classes = new ClazzAgregator(classes);
+        this.recalculateAll;
+    }
 
-    @getter @important gnosis: number;
+    @getter @importantSetter gnosis: number;
 
-    @getter @important agi: number;
+    @getter @importantSetter agi: number;
 
-    @getter @important con: number;
+    @getter @importantSetter con: number;
 
-    @getter @important des: number;
+    @getter @importantSetter des: number;
 
-    @getter @important fue: number;
+    @getter @importantSetter fue: number;
 
-    @getter @important int: number;
+    @getter @importantSetter int: number;
 
-    @getter @important per: number;
+    @getter @importantSetter per: number;
 
-    @getter @important pod: number;
+    @getter @importantSetter pod: number;
 
-    @getter @important vol: number;
+    @getter @importantSetter vol: number;
 
-    @calculatedValue((sheet: Sheet) => sheet.classes
-        .toArray()
-        .map(clazz => clazz.levels)
-        .reduce((accumulator, current) => accumulator + current, 0)
-    ) level: number;
+    @calculatedValue((sheet: Sheet) => sheet._classes.totalLevel) level: number;
 
     @calculatedValue((sheet: Sheet) => sheet.agi) agiFinal: number;
     @calculatedValue((sheet: Sheet) => sheet.con) conFinal: number;
@@ -119,7 +120,7 @@ export class Sheet {
     @calculatedValue((sheet: Sheet) => sheet.presence + sheet.podBonus) rm: number;
     @calculatedValue((sheet: Sheet) => sheet.presence + sheet.volBonus) rp: number;
 
-    @calculatedValue((sheet: Sheet) => sheet.level === 0 ? 400 : 500 + sheet.level * 100) totalPDs: number;
+    @calculatedValue((sheet: Sheet) => sheet._classes.totalPDs) totalPDs: number;
     @calculatedValue((sheet: Sheet) => 3) availablePcs: number;
     @calculatedValue((sheet: Sheet) => 0) exp: number;
     @calculatedValue((sheet: Sheet) => 0) expPenalizator: number;
@@ -145,12 +146,26 @@ export class Sheet {
         private _per: number,
         private _pod: number,
         private _vol: number,
-        private _classes: LinkedList<Clazz>,
+        classes: Clazz[],
         private _race: Race,
         private _nephilim: Option<Nephilim>,
         private _gnosis: number,
         private _additionalInfo: string[] = []
     ) {
+        this._classes = new ClazzAgregator(classes);
+        this.applyAll();
+    }
+
+    public readonly recalculateAll = () => {
+        let importantProperties: string[] = getDecoratedProperties(this, "important")
+            .map(name => name[0] === "_" ? name.slice(1) : name)
+        let allPropertiesName: string[] = Object.getOwnPropertyNames(this).filter(name => name[0] === "_")
+        allPropertiesName.forEach(name => {
+            if (!importantProperties.includes(name.slice(1))) {
+                this[name] = undefined;
+            }
+        });
+        this._additionalInfo = [];
         this.applyAll();
     }
 }

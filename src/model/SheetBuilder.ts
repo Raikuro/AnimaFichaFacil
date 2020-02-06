@@ -4,7 +4,6 @@ import { Nephilim } from "./Nephilim";
 import { Race } from "./Race";
 import { Sheet } from './Sheet';
 import { Sex } from './Sex';
-import { LinkedList } from '../utils/LinkedList';
 
 export class SheetBuilder {
 
@@ -64,7 +63,7 @@ export class SheetBuilder {
     }
 
     public withClasses(classes: Clazz[]): SheetBuilder {
-        this._classes = LinkedList.fromArray(classes);
+        this._classes = classes;
         return this;
     }
 
@@ -95,7 +94,7 @@ export class SheetBuilder {
         private _per?: number,
         private _pod?: number,
         private _vol?: number,
-        private _classes?: LinkedList<Clazz>,
+        private _classes?: Clazz[],
         private _race?: Race,
         private _nephilim: Option<Nephilim> = none,
         private _gnosis?: number,
