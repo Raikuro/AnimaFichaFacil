@@ -1,4 +1,4 @@
-import { BaseComand } from "./BaseComand";
+import { BaseCommand } from "./BaseCommand";
 import { Sheet } from "./Sheet";
 import { sylvain }  from "./Nephilim/Sylvain"
 import { jayan } from "./Nephilim/jayan";
@@ -10,7 +10,7 @@ import { devah } from "./Nephilim/Devah";
 import { vetala } from "./Nephilim/Vetala";
 import { turak } from "./Nephilim/Turak";
 
-export class Nephilim implements BaseComand {
+export class Nephilim implements BaseCommand {
    private constructor(public readonly apply: (sheet: Sheet) => Sheet) {}
    
    public static readonly SYLVAIN: Nephilim = new Nephilim(sylvain);

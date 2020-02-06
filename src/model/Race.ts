@@ -1,5 +1,5 @@
 import { Sheet } from "./Sheet";
-import { BaseComand } from "./BaseComand";
+import { BaseCommand } from "./BaseCommand";
 import { identity } from "fp-ts/lib/function";
 import { sylvain } from "./Races/Sylvain";
 import { jayan } from "./Races/jayan";
@@ -12,7 +12,7 @@ import { vetala } from "./Races/Vetala";
 import { tuanDalyr } from "./Races/TuanDalyr";
 import { turak } from "./Races/Turak";
 
-export class Race implements BaseComand {
+export class Race implements BaseCommand {
     constructor(private readonly _natura: number, public readonly apply: (sheet: Sheet) => Sheet) {}
 
     public get natura() { return this._natura; }

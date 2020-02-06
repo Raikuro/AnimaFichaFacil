@@ -1,5 +1,5 @@
 import { Sheet } from "./Sheet";
 
-export interface BaseComand {
+export interface BaseCommand {
     readonly apply: (sheet:Sheet) => Sheet
 }
