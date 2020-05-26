@@ -1,16 +1,19 @@
 {
     "compilerOptions": {
         "experimentalDecorators": true,
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "dist",
-    "sourceMap": true
+        "target": "es6",
+        "module": "commonjs",
+        "types": [
+            "reflect-metadata"
+        ],
+        "outDir": "dist",
+        "sourceMap": true
     },
     "include": [
-    "src/**/*.ts"
+        "src/**/*.ts"
     ],
     "exclude": [
-    "node_modules",
-    ".vscode"
+        "node_modules",
+        ".vscode"
     ]
-    }
+}
