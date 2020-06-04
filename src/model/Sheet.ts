@@ -7,8 +7,9 @@ import { SheetBuilder } from './SheetBuilder';
 import { Sex } from './Sex';
 import 'reflect-metadata';
 import { ClazzAgregator } from './ClazzAgregator';
+import { AbilitiesForm } from './AbilitiesForm';
 
-export class Sheet {
+export class Sheet{
 
     private readonly applyNephilim = (): Sheet => {
         return fold<Nephilim, Sheet>(() => this, nephilim => nephilim.apply(this))(this.nephilim);
@@ -127,6 +128,8 @@ export class Sheet {
     @calculatedValue((sheet: Sheet) => Math.floor(sheet.level / 2)) availableAttributeUp: number;
     @calculatedValue((sheet: Sheet) => 0) levelMod: number;
 
+    @getter @setter @important abilities:AbilitiesForm;
+   
     public get additionalInfo() {
         return this["_additionalInfo"] ? this["_additionalInfo"] : [];
     }
@@ -153,6 +156,7 @@ export class Sheet {
         private _additionalInfo: string[] = []
     ) {
         this._classes = new ClazzAgregator(classes);
+        this.abilities = new AbilitiesForm(this);
         this.applyAll();
     }
 

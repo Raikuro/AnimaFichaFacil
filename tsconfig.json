@@ -4,7 +4,9 @@
         "target": "es6",
         "module": "commonjs",
         "types": [
-            "reflect-metadata"
+            "node",
+            "reflect-metadata",
+            "mocha"
         ],
         "outDir": "dist",
         "sourceMap": true

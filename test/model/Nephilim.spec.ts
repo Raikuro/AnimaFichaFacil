@@ -7,6 +7,7 @@ import { Sheet } from "../../src/model/Sheet";
 import { identity } from 'fp-ts/lib/function';
 import { Clazz, GUERRERO } from '../../src/model/Clazz';
 import { Race } from '../../src/model/Race';
+import { InvestedPdsForm } from '../../src/model/InvestedPdsForm';
 
 export default function suite() {
 
@@ -23,7 +24,7 @@ export default function suite() {
       .withPer(5)
       .withPod(5)
       .withVol(5)
-      .withClasses([new Clazz(GUERRERO, 1)])
+      .withClasses([new Clazz(GUERRERO, 1, new InvestedPdsForm())])
       .withRace(Race.HUMANO)
       .withGnosis(10)
   });

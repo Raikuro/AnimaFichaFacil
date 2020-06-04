@@ -4,6 +4,8 @@ import { Sex } from "../../src/model/Sex";
 import { Race } from "../../src/model/Race";
 import { Clazz, GUERRERO } from "../../src/model/Clazz";
 import { LinkedList } from "../../src/utils/LinkedList";
+import { PdsForm } from "../../src/model/PdsForm";
+import { InvestedPdsForm } from "../../src/model/InvestedPdsForm";
 
 export default function suite() {
 
@@ -20,7 +22,7 @@ export default function suite() {
       .withPer(8)
       .withPod(12)
       .withVol(15)
-      .withClasses([new Clazz(GUERRERO, 1)])
+      .withClasses([new Clazz(GUERRERO, 1, new InvestedPdsForm())])
       .withRace(Race.HUMANO)
       .withGnosis(10)
   });
@@ -50,7 +52,7 @@ export default function suite() {
     expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
-    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1)]);
+    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1, new InvestedPdsForm())]);
     expect(sheet.level).to.equal(1);
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);
@@ -110,9 +112,9 @@ export default function suite() {
     expect(sheet.expPenalizator).to.equal(-3);
     expect(sheet.levelMod).to.equal(2);
     expect(sheet.naturaPlus).to.equal(5);
-
+    
     sheet.race = Race.HUMANO
-
+    
     expect(sheet.agiFinal).to.equal(1);
     expect(sheet.conFinal).to.equal(2);
     expect(sheet.desFinal).to.equal(3);
@@ -121,7 +123,7 @@ export default function suite() {
     expect(sheet.perFinal).to.equal(8);
     expect(sheet.podFinal).to.equal(12);
     expect(sheet.volFinal).to.equal(15);
-
+    
     expect(sheet.agiBonus).to.equal(-30);
     expect(sheet.conBonus).to.equal(-20);
     expect(sheet.desBonus).to.equal(-10);
@@ -130,17 +132,17 @@ export default function suite() {
     expect(sheet.perBonus).to.equal(10);
     expect(sheet.podBonus).to.equal(20);
     expect(sheet.volBonus).to.equal(30);
-
+    
     expect(sheet.name).to.equal("BANANA NAME");
     expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
-    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1)]);
+    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1, new InvestedPdsForm())]);
     expect(sheet.level).to.equal(1);
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);
     expect(sheet.naturaPlus).to.equal(10);
-
+    
     expect(sheet.totalLifePoints).to.equal(20);
     expect(sheet.currentLifePoints).to.equal(20);
     expect(sheet.regen).to.equal(0);
@@ -148,7 +150,7 @@ export default function suite() {
     expect(sheet.fatiguePoints).to.equal(2);
     expect(sheet.currentFatiguePoints).to.equal(2);
     expect(sheet.typeOfMovement).to.equal(1);
-
+    
     expect(sheet.presence).to.equal(30);
     expect(sheet.rf).to.equal(10);
     expect(sheet.re).to.equal(10);
@@ -190,7 +192,7 @@ export default function suite() {
     expect(sheet.sex).to.equal(Sex.MALE);
     expect(sheet.appearance).to.equal(10);
     expect(sheet.race).to.equal(Race.HUMANO);
-    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1)]);
+    expect(sheet.classes).to.eql([new Clazz(GUERRERO, 1, new InvestedPdsForm())]);
     expect(sheet.level).to.equal(1);
     expect(sheet.size).to.equal(6);
     expect(sheet.gnosis).to.equal(10);
@@ -246,7 +248,6 @@ export default function suite() {
     expect(sheet.expPenalizator).to.equal(-3);
     expect(sheet.levelMod).to.equal(2);
     expect(sheet.naturaPlus).to.equal(5);
-
   })
 
 }

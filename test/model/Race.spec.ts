@@ -4,6 +4,7 @@ import { Race } from "../../src/model/Race";
 import { Sex } from "../../src/model/Sex";
 import { Sheet } from "../../src/model/Sheet";
 import { Clazz, GUERRERO } from '../../src/model/Clazz';
+import { InvestedPdsForm } from '../../src/model/InvestedPdsForm';
 
 export default function suite() {
 
@@ -20,7 +21,7 @@ export default function suite() {
       .withPer(5)
       .withPod(5)
       .withVol(5)
-      .withClasses([new Clazz(GUERRERO, 1)])
+      .withClasses([new Clazz(GUERRERO, 1, new InvestedPdsForm())])
       .withGnosis(10)
   });
 
