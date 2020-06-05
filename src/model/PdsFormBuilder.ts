@@ -1,5 +1,4 @@
 import { PdsForm } from "./PdsForm";
-import { getter, setter} from '../utils/SheetDecorators';
 
 export class PdsFormBuilder{
     public build(){
@@ -40,9 +39,7 @@ export class PdsFormBuilder{
         private _acuFue?:number,
         private _acuPod?:number,
         private _acuVol?:number
-        ){
-        
-    }
+        ){}
 
     public withHAtaque(hAtaque:number){
         this._hAtaque = hAtaque;

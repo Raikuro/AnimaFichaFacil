@@ -18,34 +18,30 @@ export class AbilitiesForm extends PdsForm {
   set bonusHEsquiva(newBonus) { this._bonusHEsquiva = newBonus; }
   set bonusLlevarArmadura(newBonus) { this._bonusLlevarArmadura = newBonus; }
 
-  constructor(sheet: Sheet) {
-    super(sheet.desBonus, sheet.desBonus, sheet.agiBonus, sheet.fueBonus,
-      AbilitiesForm.getKiPoints(sheet.agi), AbilitiesForm.getKiPoints(sheet.con), AbilitiesForm.getKiPoints(sheet.des),
-      AbilitiesForm.getKiPoints(sheet.fue), AbilitiesForm.getKiPoints(sheet.pod), AbilitiesForm.getKiPoints(sheet.vol),
-      AbilitiesForm.getKiAcu(sheet.agi), AbilitiesForm.getKiAcu(sheet.con), AbilitiesForm.getKiAcu(sheet.des),
-      AbilitiesForm.getKiAcu(sheet.fue), AbilitiesForm.getKiAcu(sheet.pod), AbilitiesForm.getKiAcu(sheet.vol))
+  constructor(private _sheet: Sheet) {
+    super();
     this._bonusHAtaque = 0;
     this._bonusHParada = 0;
     this._bonusHEsquiva = 0;
     this._bonusLlevarArmadura = 0;
   }
 
-  get hAtaque() { return Math.trunc(super.hAtaque + this.bonusHAtaque); };
-  get hParada() { return Math.trunc(super.hParada + this.bonusHParada); };
-  get llevarArmadura() { return Math.trunc(super.llevarArmadura + this.bonusLlevarArmadura); };
-  get hEsquiva() { return Math.trunc(super.hEsquiva + this.bonusHEsquiva); };
-  get kiAgi() { return Math.trunc(super.kiAgi); }
-  get kiDes() { return Math.trunc(super.kiDes); }
-  get kiCon() { return Math.trunc(super.kiCon); }
-  get kiFue() { return Math.trunc(super.kiFue); }
-  get kiVol() { return Math.trunc(super.kiVol); }
-  get kiPod() { return Math.trunc(super.kiPod); }
-  get acuDes() { return Math.trunc(super.acuDes); }
-  get acuAgi() { return Math.trunc(super.acuAgi); }
-  get acuCon() { return Math.trunc(super.acuCon); }
-  get acuFue() { return Math.trunc(super.acuFue); }
-  get acuVol() { return Math.trunc(super.acuVol); }
-  get acuPod() { return Math.trunc(super.acuPod); }
+  get hAtaque() { return Math.trunc(super.hAtaque + this.bonusHAtaque + this._sheet.desBonus); };
+  get hParada() { return Math.trunc(super.hParada + this.bonusHParada + this._sheet.desBonus); };
+  get llevarArmadura() { return Math.trunc(super.llevarArmadura + this.bonusLlevarArmadura + this._sheet.fueBonus); };
+  get hEsquiva() { return Math.trunc(super.hEsquiva + this.bonusHEsquiva +  this._sheet.agiBonus); };
+  get kiAgi() { return Math.trunc(super.kiAgi) + AbilitiesForm.getKiPoints(this._sheet.agi); }
+  get kiDes() { return Math.trunc(super.kiDes) + AbilitiesForm.getKiPoints(this._sheet.des); }
+  get kiCon() { return Math.trunc(super.kiCon) + AbilitiesForm.getKiPoints(this._sheet.con); }
+  get kiFue() { return Math.trunc(super.kiFue) + AbilitiesForm.getKiPoints(this._sheet.fue); }
+  get kiPod() { return Math.trunc(super.kiPod) + AbilitiesForm.getKiPoints(this._sheet.pod); }
+  get kiVol() { return Math.trunc(super.kiVol) + AbilitiesForm.getKiPoints(this._sheet.vol); }
+  get acuAgi() { return Math.trunc(super.acuAgi) + AbilitiesForm.getKiAcu(this._sheet.agi); }
+  get acuDes() { return Math.trunc(super.acuDes) + AbilitiesForm.getKiAcu(this._sheet.des); }
+  get acuCon() { return Math.trunc(super.acuCon) + AbilitiesForm.getKiAcu(this._sheet.con); }
+  get acuFue() { return Math.trunc(super.acuFue) + AbilitiesForm.getKiAcu(this._sheet.fue); }
+  get acuPod() { return Math.trunc(super.acuPod) + AbilitiesForm.getKiAcu(this._sheet.pod); }
+  get acuVol() { return Math.trunc(super.acuVol) + AbilitiesForm.getKiAcu(this._sheet.vol); }
   
   set hAtaque(newHAtaque) { super.hAtaque += newHAtaque; }
   set hParada(newhParada) { super.hParada += newhParada; }

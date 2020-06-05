@@ -39,7 +39,7 @@ export class Sheet{
         let cuantum = Math.floor(attributeAux / 5);
         let cuantum2 = Math.ceil((Math.floor(attributeAux % 5)) / 2);
         let result = (cuantum * 3 + cuantum2) * 5
-        return result;
+        return Math.min(45, result);
     }
 
     public static builder = () => new SheetBuilder();
@@ -170,6 +170,7 @@ export class Sheet{
             }
         });
         this._additionalInfo = [];
+        this.abilities = new AbilitiesForm(this);
         this.applyAll();
     }
 }

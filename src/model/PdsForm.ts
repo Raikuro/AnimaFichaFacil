@@ -1,55 +1,41 @@
+import { setter, getter } from "../utils/SheetDecorators";
+
 export class PdsForm {
+
+    @getter @setter public hAtaque: number;
+    @getter @setter public hParada: number;
+    @getter @setter public hEsquiva: number;
+    @getter @setter public llevarArmadura: number;
+    @getter @setter public kiAgi: number;
+    @getter @setter public kiCon: number;
+    @getter @setter public kiDes: number;
+    @getter @setter public kiFue: number;
+    @getter @setter public kiPod: number;
+    @getter @setter public kiVol: number;
+    @getter @setter public acuAgi: number;
+    @getter @setter public acuCon: number;
+    @getter @setter public acuDes: number;
+    @getter @setter public acuFue: number;
+    @getter @setter public acuPod: number;
+    @getter @setter public acuVol: number;
+
     constructor(
-        private _hAtaque,
-        private _hParada,
-        private _hEsquiva,
-        private _llevarArmadura,
-        private _kiAgi,
-        private _kiCon,
-        private _kiDes,
-        private _kiFue,
-        private _kiPod,
-        private _kiVol,
-        private _acuAgi,
-        private _acuCon,
-        private _acuDes,
-        private _acuFue,
-        private _acuPod,
-        private _acuVol
+        private _hAtaque: number = 0,
+        private _hParada: number = 0,
+        private _hEsquiva: number = 0,
+        private _llevarArmadura: number = 0,
+        private _kiAgi: number = 0,
+        private _kiCon: number = 0,
+        private _kiDes: number = 0,
+        private _kiFue: number = 0,
+        private _kiPod: number = 0,
+        private _kiVol: number = 0,
+        private _acuAgi: number = 0,
+        private _acuCon: number = 0,
+        private _acuDes: number = 0,
+        private _acuFue: number = 0,
+        private _acuPod: number = 0,
+        private _acuVol: number = 0
     ) { }
-
-    get hAtaque() { return this._hAtaque };
-    get hParada() { return this._hParada };
-    get hEsquiva() { return this._hEsquiva };
-    get llevarArmadura() { return this._llevarArmadura };
-    get kiAgi() { return this._kiAgi };
-    get kiCon() { return this._kiCon };
-    get kiDes() { return this._kiDes };
-    get kiFue() { return this._kiFue };
-    get kiPod() { return this._kiPod };
-    get kiVol() { return this._kiVol };
-    get acuAgi() { return this._acuAgi };
-    get acuCon() { return this._acuCon };
-    get acuDes() { return this._acuDes };
-    get acuFue() { return this._acuFue };
-    get acuPod() { return this._acuPod };
-    get acuVol() { return this._acuVol };
-
-    set hAtaque(newHAtaque) { this._hAtaque = newHAtaque };
-    set hParada(hParada) { this._hParada = hParada };
-    set hEsquiva(hEsquiva) { this._hEsquiva = hEsquiva };
-    set llevarArmadura(llevarArmadura) { this._llevarArmadura = llevarArmadura };
-    set kiAgi(kiAgi) { this._kiAgi = kiAgi };
-    set kiCon(kiCon) { this._kiCon = kiCon };
-    set kiDes(kiDes) { this._kiDes = kiDes };
-    set kiFue(kiFue) { this._kiFue = kiFue };
-    set kiPod(kiPod) { this._kiPod = kiPod };
-    set kiVol(kiVol) { this._kiVol = kiVol };
-    set acuAgi(acuAgi) { this._acuAgi = acuAgi };
-    set acuCon(acuCon) { this._acuCon = acuCon };
-    set acuDes(acuDes) { this._acuDes = acuDes };
-    set acuFue(acuFue) { this._acuFue = acuFue };
-    set acuPod(acuPod) { this._acuPod = acuPod };
-    set acuVol(acuVol) { this._acuVol = acuVol };
 
 }
